@@ -1,0 +1,44 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.1.5] - 2019-01-13
+### Added
+- Started filling out all of the tech details
+
+## [0.1.4] - 2019-01-06
+### Added
+- Set homeworld function
+- Began filling out the predefined races
+- Added in starting tech levels
+- Added in tech cost calculation
+- Started adding the players to the tutorial game
+
+### Changed
+- Fixed the remaining display habitat levels
+
+## [0.1.4] - 2018-12-31
+### Added
+- Planet dump API is now implemented
+### Changed
+- Fixed up new tutorial game: now saves to database
+
+## [0.1.3] - 2018-12-28
+### Changed
+- Switched to sqlite library instead of rusqlite or diesel
+
+## [0.1.2] - 2018-11-19
+### Added
+- Game storage via saving compressed JSON in sqlite
+- Generation of tutorial game and saving in sqlite
+- Further definition of objects, including beginnings of universe generation
+
+## [0.1.1] - 2018-11-15
+### Added
+- Initial tracked release
+- HTTP web service up and running and responding with 404 undefined endpoints
+- Skeleton of receiving a JSON, validating against schema proven out
+- Skeleton of creating a new tutorial game added
+- Initial logging, configuration, argparse support (--version)
