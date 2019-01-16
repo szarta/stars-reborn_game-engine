@@ -22,6 +22,8 @@
 use ::game::objects::tech::ResearchField;
 use ::game::objects::race::Race;
 use ::game::objects::tech::TechnologyId;
+use ::game::objects::tech::Technology;
+use ::game::objects::tech::TECHNOLOGY_DETAILS;
 
 #[derive(Serialize, Deserialize)]
 pub struct Player {
@@ -66,12 +68,17 @@ pub fn calculate_initial_learned_technologies(available_techs: &Vec<TechnologyId
     let mut ret : Vec<TechnologyId> = Vec::new();
 
     for tid in available_techs.iter() {
+        let t : &Technology = &TECHNOLOGY_DETAILS[*tid as usize];
+        if tech_level[0] >= t.requirement.levels[0] &&
+           tech_level[1] >= t.requirement.levels[1] &&
+           tech_level[2] >= t.requirement.levels[2] &&
+           tech_level[3] >= t.requirement.levels[3] &&
+           tech_level[4] >= t.requirement.levels[4] &&
+           tech_level[5] >= t.requirement.levels[5] {
 
-
+            ret.push(tid.clone());
+        }
     }
 
     return ret;
 }
-
-
-
