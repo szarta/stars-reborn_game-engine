@@ -123,6 +123,7 @@ pub enum TechnologySlotType {
     Bomb,
     MiningRobot,
     ArmorScannerElectMech,
+    ElectMech,
     MineLayer
 }
 
@@ -424,7 +425,8 @@ pub struct Technology {
     pub safe_distance: Option<u16>,
     pub warp: Option<u8>,
     pub slots: Option<[Option<TechnologySlot>; 16]>,
-    pub dock_capacity: Option<u16>
+    pub dock_capacity: Option<u16>,
+    pub regen_bonus_percent: Option<u8>
 }
 
 pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
@@ -451,7 +453,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Viewer 90
         requirement: TechnologyRequirement {
@@ -476,7 +478,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Scoper150
         requirement: TechnologyRequirement {
@@ -501,7 +503,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Scoper220
         requirement: TechnologyRequirement {
@@ -526,7 +528,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Scoper280
         requirement: TechnologyRequirement {
@@ -551,7 +553,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Scoper320X
         requirement: TechnologyRequirement {
@@ -576,7 +578,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Scoper400X
         requirement: TechnologyRequirement {
@@ -601,7 +603,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Scoper500X
         requirement: TechnologyRequirement {
@@ -626,7 +628,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Scoper620X
         requirement: TechnologyRequirement {
@@ -651,7 +653,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // SDI
         requirement: TechnologyRequirement {
@@ -676,7 +678,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Missile Battery
         requirement: TechnologyRequirement {
@@ -701,7 +703,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Laser Battery
         requirement: TechnologyRequirement {
@@ -726,7 +728,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Planetary Shield
         requirement: TechnologyRequirement {
@@ -751,7 +753,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Neutron Shield
         requirement: TechnologyRequirement {
@@ -776,7 +778,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Tritanium
         requirement: TechnologyRequirement {
@@ -802,7 +804,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Crobmnium
         requirement: TechnologyRequirement {
@@ -828,7 +830,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Carbonic Armor
         requirement: TechnologyRequirement {
@@ -854,7 +856,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Strobnium
         requirement: TechnologyRequirement {
@@ -880,7 +882,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Organic Armor
         requirement: TechnologyRequirement {
@@ -906,7 +908,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Kelarium
         requirement: TechnologyRequirement {
@@ -932,7 +934,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Fielded Kelarium
         requirement: TechnologyRequirement {
@@ -958,7 +960,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Depleted Neutronium
         requirement: TechnologyRequirement {
@@ -985,7 +987,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Neutronium
         requirement: TechnologyRequirement {
@@ -1011,7 +1013,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Valanium
         requirement: TechnologyRequirement {
@@ -1037,7 +1039,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Superlatanium
         requirement: TechnologyRequirement {
@@ -1063,7 +1065,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Moleskin Shield
         requirement: TechnologyRequirement {
@@ -1089,7 +1091,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Cowhide Shield
         requirement: TechnologyRequirement {
@@ -1115,7 +1117,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Wolverine Diffuse Shield
         requirement: TechnologyRequirement {
@@ -1141,7 +1143,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Croby Sharmor
         requirement: TechnologyRequirement {
@@ -1168,7 +1170,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Shadow Shield
         requirement: TechnologyRequirement {
@@ -1194,7 +1196,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Bear Neutrino Barrier
         requirement: TechnologyRequirement {
@@ -1220,7 +1222,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Gorilla Delegator
         requirement: TechnologyRequirement {
@@ -1246,7 +1248,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Elephant Hide Fortress
         requirement: TechnologyRequirement {
@@ -1272,7 +1274,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Complete Phase Shield
         requirement: TechnologyRequirement {
@@ -1298,7 +1300,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Mine Dispenser 40
         requirement: TechnologyRequirement {
@@ -1325,7 +1327,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Mine Dispenser 50
         requirement: TechnologyRequirement {
@@ -1352,7 +1354,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Mine Dispenser 80
         requirement: TechnologyRequirement {
@@ -1379,7 +1381,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Mine Dispenser 130
         requirement: TechnologyRequirement {
@@ -1406,7 +1408,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Heavy Dispenser 50
         requirement: TechnologyRequirement {
@@ -1433,7 +1435,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Heavy Dispenser 110
         requirement: TechnologyRequirement {
@@ -1460,7 +1462,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Heavy Dispenser 200
         requirement: TechnologyRequirement {
@@ -1487,7 +1489,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Speed Trap 20
         requirement: TechnologyRequirement {
@@ -1514,7 +1516,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Speed Trap 30
         requirement: TechnologyRequirement {
@@ -1541,7 +1543,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Speed Trap 50
         requirement: TechnologyRequirement {
@@ -1568,7 +1570,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Bat Scanner
         requirement: TechnologyRequirement {
@@ -1594,7 +1596,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Rhino Scanner
         requirement: TechnologyRequirement {
@@ -1620,7 +1622,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Mole Scanner
         requirement: TechnologyRequirement {
@@ -1646,7 +1648,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // DNA Scanner
         requirement: TechnologyRequirement {
@@ -1672,7 +1674,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Possum Scanner
         requirement: TechnologyRequirement {
@@ -1698,7 +1700,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // PickPocket Scanner
         requirement: TechnologyRequirement {
@@ -1724,7 +1726,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Chameleon Scanner
         requirement: TechnologyRequirement {
@@ -1751,7 +1753,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Ferret Scanner
         requirement: TechnologyRequirement {
@@ -1777,7 +1779,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Dolphin Scanner
         requirement: TechnologyRequirement {
@@ -1803,7 +1805,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Gazelle Scanner
         requirement: TechnologyRequirement {
@@ -1829,7 +1831,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // RNA Scanner
         requirement: TechnologyRequirement {
@@ -1855,7 +1857,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Cheetah Scanner
         requirement: TechnologyRequirement {
@@ -1881,7 +1883,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Elephant Scanner
         requirement: TechnologyRequirement {
@@ -1907,7 +1909,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Eagle Eye Scanner
         requirement: TechnologyRequirement {
@@ -1933,7 +1935,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Robber Baron Scanner
         requirement: TechnologyRequirement {
@@ -1959,7 +1961,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Peerless Scanner
         requirement: TechnologyRequirement {
@@ -1985,7 +1987,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Colonization Module
         requirement: TechnologyRequirement {
@@ -2010,7 +2012,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Orbital Construction Module
         requirement: TechnologyRequirement {
@@ -2035,7 +2037,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Cargo Pod
         requirement: TechnologyRequirement {
@@ -2061,7 +2063,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Super Cargo Pod
         requirement: TechnologyRequirement {
@@ -2087,7 +2089,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Fuel Tank
         requirement: TechnologyRequirement {
@@ -2113,7 +2115,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Super Fuel Tank
         requirement: TechnologyRequirement {
@@ -2139,7 +2141,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Manuevering Jet
         requirement: TechnologyRequirement {
@@ -2166,7 +2168,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Overthruster
         requirement: TechnologyRequirement {
@@ -2193,7 +2195,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Beam Deflector
         requirement: TechnologyRequirement {
@@ -2219,7 +2221,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Transport Cloaking
         requirement: TechnologyRequirement {
@@ -2245,7 +2247,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Stealth Cloak
         requirement: TechnologyRequirement {
@@ -2271,7 +2273,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Super Stealth Cloak
         requirement: TechnologyRequirement {
@@ -2297,7 +2299,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Ultra Stealth Cloak
         requirement: TechnologyRequirement {
@@ -2323,7 +2325,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, initiative: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Battle Computer
         requirement: TechnologyRequirement {
@@ -2351,7 +2353,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Battle Super Computer
         requirement: TechnologyRequirement {
@@ -2379,7 +2381,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Battle Nexus
         requirement: TechnologyRequirement {
@@ -2407,7 +2409,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Jammer 10
         requirement: TechnologyRequirement {
@@ -2434,7 +2436,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Jammer 20
         requirement: TechnologyRequirement {
@@ -2461,7 +2463,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Jammer 30
         requirement: TechnologyRequirement {
@@ -2488,7 +2490,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Jammer 50
         requirement: TechnologyRequirement {
@@ -2515,7 +2517,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Energy Capacitor
         requirement: TechnologyRequirement {
@@ -2543,7 +2545,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Flux Capacitor
         requirement: TechnologyRequirement {
@@ -2571,7 +2573,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Energy Dampener
         requirement: TechnologyRequirement {
@@ -2598,7 +2600,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Tachyon Detector
         requirement: TechnologyRequirement {
@@ -2625,7 +2627,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Antimatter Generator
         requirement: TechnologyRequirement {
@@ -2653,7 +2655,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Total Terraform 3
         requirement: TechnologyRequirement {
@@ -2680,7 +2682,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Total Terraform 5
         requirement: TechnologyRequirement {
@@ -2707,7 +2709,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Total Terraform 7
         requirement: TechnologyRequirement {
@@ -2734,7 +2736,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Total Terraform 10
         requirement: TechnologyRequirement {
@@ -2761,7 +2763,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Total Terraform 15
         requirement: TechnologyRequirement {
@@ -2788,7 +2790,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Total Terraform 20
         requirement: TechnologyRequirement {
@@ -2815,7 +2817,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Total Terraform 25
         requirement: TechnologyRequirement {
@@ -2842,7 +2844,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Total Terraform 30
         requirement: TechnologyRequirement {
@@ -2869,7 +2871,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Gravity Terraform 3
         requirement: TechnologyRequirement {
@@ -2896,7 +2898,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Gravity Terraform 7
         requirement: TechnologyRequirement {
@@ -2923,7 +2925,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Gravity Terraform 11
         requirement: TechnologyRequirement {
@@ -2950,7 +2952,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Gravity Terraform 15
         requirement: TechnologyRequirement {
@@ -2977,7 +2979,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Temperature Terraform 3
         requirement: TechnologyRequirement {
@@ -3004,7 +3006,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Temperature Terraform 7
         requirement: TechnologyRequirement {
@@ -3031,7 +3033,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Temperature Terraform 11
         requirement: TechnologyRequirement {
@@ -3058,7 +3060,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Temperature Terraform 15
         requirement: TechnologyRequirement {
@@ -3085,7 +3087,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Radiation Terraform 3
         requirement: TechnologyRequirement {
@@ -3112,7 +3114,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Radiation Terraform 7
         requirement: TechnologyRequirement {
@@ -3139,7 +3141,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Radiation Terraform 11
         requirement: TechnologyRequirement {
@@ -3166,7 +3168,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Radiation Terraform 15
         requirement: TechnologyRequirement {
@@ -3193,7 +3195,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Robo Midget Miner
         requirement: TechnologyRequirement {
@@ -3222,7 +3224,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Robo Mini Miner
         requirement: TechnologyRequirement {
@@ -3251,7 +3253,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Robo Miner
         requirement: TechnologyRequirement {
@@ -3280,7 +3282,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Robo Maxi Miner
         requirement: TechnologyRequirement {
@@ -3309,7 +3311,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Robo Super Miner
         requirement: TechnologyRequirement {
@@ -3338,7 +3340,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Robo Ultra Miner
         requirement: TechnologyRequirement {
@@ -3367,7 +3369,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Orbital Adjuster
         requirement: TechnologyRequirement {
@@ -3397,7 +3399,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Settlers Delight
         requirement: TechnologyRequirement {
@@ -3429,7 +3431,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Quick Jump 5
         requirement: TechnologyRequirement {
@@ -3461,7 +3463,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Fuel Mizer
         requirement: TechnologyRequirement {
@@ -3493,7 +3495,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Long Hump 6
         requirement: TechnologyRequirement {
@@ -3525,7 +3527,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Daddy Long Legs 7
         requirement: TechnologyRequirement {
@@ -3557,7 +3559,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Alpha Drive 8
         requirement: TechnologyRequirement {
@@ -3589,7 +3591,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Trans Galactic Drive
         requirement: TechnologyRequirement {
@@ -3621,7 +3623,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Interspace 10
         requirement: TechnologyRequirement {
@@ -3653,7 +3655,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Trans Star 10
         requirement: TechnologyRequirement {
@@ -3685,7 +3687,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Radiating Hydro Ram Scoop
         requirement: TechnologyRequirement {
@@ -3717,7 +3719,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Radiating Hydro Ram Scoop
         requirement: TechnologyRequirement {
@@ -3749,7 +3751,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Sub Galactic Fuel Scoop
         requirement: TechnologyRequirement {
@@ -3781,7 +3783,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Trans Galactic Fuel Scoop
         requirement: TechnologyRequirement {
@@ -3813,7 +3815,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Trans Galactic Super Scoop
         requirement: TechnologyRequirement {
@@ -3845,7 +3847,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Trans Galactic Mizer Scoop
         requirement: TechnologyRequirement {
@@ -3877,7 +3879,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Galaxy Scoop
         requirement: TechnologyRequirement {
@@ -3909,7 +3911,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Enigma Pulsar
         requirement: TechnologyRequirement {
@@ -3940,7 +3942,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         min_colonists_killed: None, buildings_destroyed: None, power: None,
         range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Lady Finger Bomb
         requirement: TechnologyRequirement {
@@ -3968,7 +3970,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Black Cat Bomb
         requirement: TechnologyRequirement {
@@ -3996,7 +3998,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // M70 Bomb
         requirement: TechnologyRequirement {
@@ -4024,7 +4026,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // M80 Bomb
         requirement: TechnologyRequirement {
@@ -4052,7 +4054,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Cherry Bomb
         requirement: TechnologyRequirement {
@@ -4080,7 +4082,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // LBU17 Bomb
         requirement: TechnologyRequirement {
@@ -4108,7 +4110,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // LBU32 Bomb
         requirement: TechnologyRequirement {
@@ -4136,7 +4138,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // LBU74 Bomb
         requirement: TechnologyRequirement {
@@ -4164,7 +4166,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Retro Bomb
         requirement: TechnologyRequirement {
@@ -4192,7 +4194,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Smart Bomb
         requirement: TechnologyRequirement {
@@ -4220,7 +4222,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Neutron Bomb
         requirement: TechnologyRequirement {
@@ -4248,7 +4250,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Enriched Neutron Bomb
         requirement: TechnologyRequirement {
@@ -4276,7 +4278,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Peerless Bomb
         requirement: TechnologyRequirement {
@@ -4304,7 +4306,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Annihilator Bomb
         requirement: TechnologyRequirement {
@@ -4332,7 +4334,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Stargate 100 250
         requirement: TechnologyRequirement {
@@ -4362,7 +4364,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        warp: None, slots: None, dock_capacity: None
+        warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Stargate Any 300
         requirement: TechnologyRequirement {
@@ -4392,7 +4394,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        warp: None, slots: None, dock_capacity: None
+        warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Stargate 150 600
         requirement: TechnologyRequirement {
@@ -4422,7 +4424,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        warp: None, slots: None, dock_capacity: None
+        warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Stargate 300 500
         requirement: TechnologyRequirement {
@@ -4452,7 +4454,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        warp: None, slots: None, dock_capacity: None
+        warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Stargate 100 Any
         requirement: TechnologyRequirement {
@@ -4482,7 +4484,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        warp: None, slots: None, dock_capacity: None
+        warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Stargate Any 800
         requirement: TechnologyRequirement {
@@ -4512,7 +4514,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        warp: None, slots: None, dock_capacity: None
+        warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Stargate Any Any
         requirement: TechnologyRequirement {
@@ -4542,7 +4544,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        warp: None, slots: None, dock_capacity: None
+        warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Mass Driver 5
         requirement: TechnologyRequirement {
@@ -4569,7 +4571,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        slots: None, dock_capacity: None
+        slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Mass Driver 6
         requirement: TechnologyRequirement {
@@ -4596,7 +4598,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        slots: None, dock_capacity: None
+        slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Mass Driver 7
         requirement: TechnologyRequirement {
@@ -4623,7 +4625,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        slots: None, dock_capacity: None
+        slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Super Driver 8
         requirement: TechnologyRequirement {
@@ -4650,7 +4652,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        slots: None, dock_capacity: None
+        slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Super Driver 9
         requirement: TechnologyRequirement {
@@ -4677,7 +4679,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        slots: None, dock_capacity: None
+        slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Ultra Driver 10
         requirement: TechnologyRequirement {
@@ -4704,7 +4706,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        slots: None, dock_capacity: None
+        slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Ultra Driver 11
         requirement: TechnologyRequirement {
@@ -4731,7 +4733,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        slots: None, dock_capacity: None
+        slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Ultra Driver 12
         requirement: TechnologyRequirement {
@@ -4758,7 +4760,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        slots: None, dock_capacity: None
+        slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Ultra Driver 13
         requirement: TechnologyRequirement {
@@ -4785,7 +4787,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
-        slots: None, dock_capacity: None
+        slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Orbital Fort
         requirement: TechnologyRequirement {
@@ -4847,7 +4849,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None,
         power: None, range: None, is_spread: None,
-        hits_shields_only: None, accuracy: None,
+        hits_shields_only: None, accuracy: None, regen_bonus_percent: None
     },
     Technology { // Space Dock
         requirement: TechnologyRequirement {
@@ -4918,7 +4920,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None,
         power: None, range: None, is_spread: None,
-        hits_shields_only: None, accuracy: None,
+        hits_shields_only: None, accuracy: None, regen_bonus_percent: None
     },
     Technology { // Space Station
         requirement: TechnologyRequirement {
@@ -5001,11 +5003,11 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None,
         power: None, range: None, is_spread: None,
-        hits_shields_only: None, accuracy: None,
+        hits_shields_only: None, accuracy: None, regen_bonus_percent: None
     },
     Technology { // Ultra Station
         requirement: TechnologyRequirement {
-            levels: [0,0,0,0,0,0]
+            levels: [0,0,0,17,0,0]
         },
         cost: TechnologyCost {
             ironium: 120,
@@ -5096,54 +5098,2141 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None,
         power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None, regen_bonus_percent: None
+    },
+    Technology { // Death Star
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,17,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 120,
+            boranium: 80,
+            germanium: 350,
+            resources: 750
+        },
+        armor: Some(1500),
+        initiative: Some(16),
+        dock_capacity: Some(DOCK_CAPACITY_INFINITE_VALUE),
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 32
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 32
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 32
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 32
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Shield,
+                    amount: 30
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Shield,
+                    amount: 30
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 20
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 20
+                }),
+              Some(TechnologySlot {
+                    slot_type: TechnologySlotType::OrbitalElect,
+                    amount: 1
+                }),
+               Some(TechnologySlot {
+                    slot_type: TechnologySlotType::OrbitalElect,
+                    amount: 1
+                }),
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None, mass: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel: None, fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, cargo: None,
+        power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None, regen_bonus_percent: None
+    },
+    Technology { // Small Freighter
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 12,
+            boranium: 0,
+            germanium: 17,
+            resources: 20
+        },
+        armor: Some(25),
+        mass: Some(25),
+        initiative: Some(0),
+        cargo: Some(70),
+        fuel: Some(130),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
         hits_shields_only: None, accuracy: None,
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // stargates
-    // mass drivers
-    // space station hulls
-    // ship hulls
-
-
-
-
-
-
-
-
-
-
-
-
+    Technology { // Medium Freighter
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,3,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 20,
+            boranium: 0,
+            germanium: 19,
+            resources: 40
+        },
+        armor: Some(50),
+        mass: Some(60),
+        initiative: Some(0),
+        cargo: Some(210),
+        fuel: Some(450),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Large Freighter
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,8,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 35,
+            boranium: 0,
+            germanium: 21,
+            resources: 100
+        },
+        armor: Some(150),
+        mass: Some(125),
+        initiative: Some(0),
+        cargo: Some(1200),
+        fuel: Some(2600),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Super Freighter
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,13,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 45,
+            boranium: 0,
+            germanium: 21,
+            resources: 125
+        },
+        armor: Some(400),
+        mass: Some(175),
+        initiative: Some(0),
+        cargo: Some(3000),
+        fuel: Some(8000),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 5
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Scout
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 4,
+            boranium: 2,
+            germanium: 4,
+            resources: 10
+        },
+        armor: Some(20),
+        mass: Some(8),
+        initiative: Some(1),
+        cargo: None,
+        fuel: Some(50),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Scanner,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Frigate
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,6,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 4,
+            boranium: 2,
+            germanium: 4,
+            resources: 12
+        },
+        armor: Some(45),
+        mass: Some(8),
+        initiative: Some(4),
+        cargo: None,
+        fuel: Some(125),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Scanner,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Destroyer
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,3,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 15,
+            boranium: 3,
+            germanium: 5,
+            resources: 35
+        },
+        armor: Some(200),
+        mass: Some(30),
+        initiative: Some(3),
+        cargo: None,
+        fuel: Some(280),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Armor,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 1
+                }),
+                 Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Mechanical,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Cruiser
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,9,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 40,
+            boranium: 5,
+            germanium: 8,
+            resources: 85
+        },
+        armor: Some(700),
+        mass: Some(90),
+        initiative: Some(5),
+        cargo: None,
+        fuel: Some(600),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ShieldElectMech,
+                    amount: 1
+                }),
+                 Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ShieldElectMech,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Battle Cruiser
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,10,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 55,
+            boranium: 8,
+            germanium: 12,
+            resources: 120
+        },
+        armor: Some(1000),
+        mass: Some(120),
+        initiative: Some(5),
+        cargo: None,
+        fuel: Some(1400),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ShieldElectMech,
+                    amount: 2
+                }),
+                 Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ShieldElectMech,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Battleship
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,13,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 120,
+            boranium: 25,
+            germanium: 20,
+            resources: 225
+        },
+        armor: Some(2000),
+        mass: Some(222),
+        initiative: Some(10),
+        cargo: None,
+        fuel: Some(2800),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 6
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 6
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Armor,
+                    amount: 6
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Shield,
+                    amount: 8
+                }),
+                 Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Dreadnought
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,16,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 140,
+            boranium: 30,
+            germanium: 25,
+            resources: 275
+        },
+        armor: Some(4500),
+        mass: Some(250),
+        initiative: Some(10),
+        cargo: None,
+        fuel: Some(4500),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 5
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 6
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 6
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 8
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Weapon,
+                    amount: 8
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Armor,
+                    amount: 8
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::WeaponShield,
+                    amount: 5
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::WeaponShield,
+                    amount: 5
+                }),
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Privateer
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,4,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 50,
+            boranium: 3,
+            germanium: 2,
+            resources: 50
+        },
+        armor: Some(150),
+        mass: Some(65),
+        initiative: Some(3),
+        cargo: Some(250),
+        fuel: Some(650),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Rogue
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,8,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 80,
+            boranium: 5,
+            germanium: 5,
+            resources: 60
+        },
+        armor: Some(450),
+        mass: Some(75),
+        initiative: Some(4),
+        cargo: Some(500),
+        fuel: Some(2250),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 1
+                }),
+                 Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MineElectMech,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MineElectMech,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Scanner,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Galleon
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,11,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 70,
+            boranium: 5,
+            germanium: 5,
+            resources: 105
+        },
+        armor: Some(900),
+        mass: Some(125),
+        initiative: Some(4),
+        cargo: Some(1000),
+        fuel: Some(2500),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 2
+                }),
+                 Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MineElectMech,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ElectMech,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Scanner,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Mini Colony Ship
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 2,
+            boranium: 0,
+            germanium: 2,
+            resources: 3
+        },
+        armor: Some(10),
+        mass: Some(8),
+        initiative: Some(0),
+        cargo: Some(10),
+        fuel: Some(150),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Mechanical,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Colony Ship
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 10,
+            boranium: 0,
+            germanium: 15,
+            resources: 20
+        },
+        armor: Some(20),
+        mass: Some(20),
+        initiative: Some(0),
+        cargo: Some(25),
+        fuel: Some(200),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Mechanical,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Mini Bomber
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,1,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 20,
+            boranium: 5,
+            germanium: 10,
+            resources: 35
+        },
+        armor: Some(50),
+        mass: Some(28),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(120),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Bomb,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // B17 Bomber
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,6,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 55,
+            boranium: 10,
+            germanium: 10,
+            resources: 150
+        },
+        armor: Some(175),
+        mass: Some(69),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(400),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Bomb,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Bomb,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Stealth Bomber
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,8,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 55,
+            boranium: 10,
+            germanium: 15,
+            resources: 175
+        },
+        armor: Some(225),
+        mass: Some(70),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(750),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Bomb,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Bomb,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Electrical,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // B52 Bomber
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,15,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 90,
+            boranium: 15,
+            germanium: 10,
+            resources: 280
+        },
+        armor: Some(450),
+        mass: Some(110),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(750),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Bomb,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Bomb,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Bomb,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Bomb,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Shield,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Midget Miner
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 10,
+            boranium: 0,
+            germanium: 3,
+            resources: 20
+        },
+        armor: Some(100),
+        mass: Some(10),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(210),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Mini Miner
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,2,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 25,
+            boranium: 0,
+            germanium: 6,
+            resources: 50
+        },
+        armor: Some(130),
+        mass: Some(80),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(210),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Miner
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,6,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 32,
+            boranium: 0,
+            germanium: 6,
+            resources: 110
+        },
+        armor: Some(475),
+        mass: Some(110),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(500),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ArmorScannerElectMech,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Maxi Miner
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,11,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 32,
+            boranium: 0,
+            germanium: 6,
+            resources: 140
+        },
+        armor: Some(1400),
+        mass: Some(110),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(850),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ArmorScannerElectMech,
+                    amount: 2
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Ultra Miner
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,14,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 30,
+            boranium: 0,
+            germanium: 6,
+            resources: 130
+        },
+        armor: Some(1500),
+        mass: Some(100),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(1300),
+        dock_capacity: None, regen_bonus_percent: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 4
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MiningRobot,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ArmorScannerElectMech,
+                    amount: 3
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Fuel Transport
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,4,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 10,
+            boranium: 0,
+            germanium: 5,
+            resources: 50
+        },
+        armor: Some(5),
+        mass: Some(12),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(750),
+        fuel_per_year: Some(200),
+        regen_bonus_percent: Some(5),
+        dock_capacity: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Shield,
+                    amount: 3
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Super Fuel Transport
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,7,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 20,
+            boranium: 0,
+            germanium: 8,
+            resources: 70
+        },
+        armor: Some(12),
+        mass: Some(111),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(2250),
+        fuel_per_year: Some(200),
+        regen_bonus_percent: Some(10),
+        dock_capacity: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Shield,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Scanner,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Mini Mine Layer
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 8,
+            boranium: 2,
+            germanium: 5,
+            resources: 20
+        },
+        armor: Some(60),
+        mass: Some(10),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(400),
+        fuel_per_year: None,
+        regen_bonus_percent: None,
+        dock_capacity: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 1
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MineLayer,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MineLayer,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Super Mine Layer
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,15,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 20,
+            boranium: 3,
+            germanium: 9,
+            resources: 30
+        },
+        armor: Some(1200),
+        mass: Some(30),
+        initiative: Some(0),
+        cargo: None,
+        fuel: Some(2200),
+        fuel_per_year: None,
+        regen_bonus_percent: None,
+        dock_capacity: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MineLayer,
+                    amount: 8
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MineLayer,
+                    amount: 8
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::ScannerElectMech,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Protection,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::MineElectMech,
+                    amount: 3
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Nubian
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,26,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 75,
+            boranium: 12,
+            germanium: 12,
+            resources: 150
+        },
+        armor: Some(5000),
+        mass: Some(100),
+        initiative: Some(2),
+        cargo: None,
+        fuel: Some(5000),
+        fuel_per_year: None,
+        regen_bonus_percent: None,
+        dock_capacity: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 3
+                }),
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
+    Technology { // Metamorph
+        requirement: TechnologyRequirement {
+            levels: [0,0,0,8,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 50,
+            boranium: 12,
+            germanium: 12,
+            resources: 120
+        },
+        armor: Some(500),
+        mass: Some(85),
+        initiative: Some(2),
+        cargo: Some(300),
+        fuel: Some(700),
+        fuel_per_year: None,
+        regen_bonus_percent: None,
+        dock_capacity: None,
+        slots: Some([
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::Engine,
+                    amount: 3
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 2
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 8
+                }),
+                Some(TechnologySlot {
+                    slot_type: TechnologySlotType::GeneralPurpose,
+                    amount: 1
+                }),
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None
+        ]),
+        warp: None,
+        safe_mass: None, safe_distance: None,
+        colonist_kill_percent: None, min_colonists_killed: None,
+        buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, power: None, range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None,
+    },
     Technology { // Laser
         requirement: TechnologyRequirement {
             levels: [0,0,0,0,0,0]
@@ -5173,7 +7262,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Xray Laser
         requirement: TechnologyRequirement {
@@ -5204,7 +7293,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         coverage: None, cargo: None, armor: None,
         is_spread: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Minigun
         requirement: TechnologyRequirement {
@@ -5235,7 +7324,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None, armor: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Yakimora Light Phaser
         requirement: TechnologyRequirement {
@@ -5266,7 +7355,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None, armor: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Blackjack
         requirement: TechnologyRequirement {
@@ -5297,7 +7386,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None, armor: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Phaser Bazooka
         requirement: TechnologyRequirement {
@@ -5328,7 +7417,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None, armor: None,
         hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Pulsed Sapper
         requirement: TechnologyRequirement {
@@ -5360,7 +7449,7 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None, armor: None,
         accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Colloidal Phaser
         requirement: TechnologyRequirement {
@@ -5388,50 +7477,176 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None, armor: None,
         accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    Technology { // Gatling Gun
+        requirement: TechnologyRequirement {
+            levels: [0,11,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 0,
+            boranium: 20,
+            germanium: 0,
+            resources: 13
+        },
+        mass: Some(3),
+        power: Some(31),
+        range: Some(2),
+        initiative: Some(12),
+        is_spread: Some(true), hits_shields_only: None, colonist_kill_percent: None,
+        min_colonists_killed: None, buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel: None, fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, cargo: None, armor: None,
+        accuracy: None, safe_mass: None,
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
+    },
+    Technology { // Mini Blaster
+        requirement: TechnologyRequirement {
+            levels: [0,12,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 0,
+            boranium: 10,
+            germanium: 0,
+            resources: 9
+        },
+        mass: Some(1),
+        power: Some(66),
+        range: Some(1),
+        initiative: Some(9),
+        is_spread: None, hits_shields_only: None, colonist_kill_percent: None,
+        min_colonists_killed: None, buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel: None, fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, cargo: None, armor: None,
+        accuracy: None, safe_mass: None,
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
+    },
+    Technology { // Bludgeon
+        requirement: TechnologyRequirement {
+            levels: [0,13,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 0,
+            boranium: 22,
+            germanium: 0,
+            resources: 9
+        },
+        mass: Some(10),
+        power: Some(231),
+        range: Some(0),
+        initiative: Some(10),
+        is_spread: None, hits_shields_only: None, colonist_kill_percent: None,
+        min_colonists_killed: None, buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel: None, fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, cargo: None, armor: None,
+        accuracy: None, safe_mass: None,
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
+    },
+    Technology { // Mark IV Blaster
+        requirement: TechnologyRequirement {
+            levels: [0,14,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 0,
+            boranium: 12,
+            germanium: 0,
+            resources: 15
+        },
+        mass: Some(2),
+        power: Some(66),
+        range: Some(2),
+        initiative: Some(7),
+        is_spread: None, hits_shields_only: None, colonist_kill_percent: None,
+        min_colonists_killed: None, buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel: None, fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, cargo: None, armor: None,
+        accuracy: None, safe_mass: None,
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
+    },
+    Technology { // Phased Sapper
+        requirement: TechnologyRequirement {
+            levels: [8,15,0,0,0,0]
+        },
+        cost: TechnologyCost {
+            ironium: 0,
+            boranium: 0,
+            germanium: 6,
+            resources: 16
+        },
+        mass: Some(1),
+        power: Some(211),
+        range: Some(3),
+        initiative: Some(14),
+        is_spread: None, hits_shields_only: Some(true), colonist_kill_percent: None,
+        min_colonists_killed: None, buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel: None, fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, cargo: None, armor: None,
+        accuracy: None, safe_mass: None,
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
+    },
+    Technology { // Heavy Blaster
+        requirement: TechnologyRequirement {
+            levels: [8,15,0,0,0,0] // TODO: RED FLAG check this
+        },
+        cost: TechnologyCost {
+            ironium: 0,
+            boranium: 20,
+            germanium: 0,
+            resources: 25
+        },
+        mass: Some(2),
+        power: Some(66),
+        range: Some(3),
+        initiative: Some(5),
+        is_spread: None, hits_shields_only: Some(true), colonist_kill_percent: None,
+        min_colonists_killed: None, buildings_destroyed: None, is_smart: None,
+        battle_speed: None, warp10_travel: None, fuel_table: None,
+        cloaking: None, battle_speed_modifier: None,
+        mining_value: None, terraforming_temperature: None,
+        terraforming_radiation: None, terraforming_gravity: None,
+        fuel: None, fuel_per_year: None, beam_damage: None, jamming: None,
+        torpedo_accuracy: None, beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, cargo: None, armor: None,
+        accuracy: None, safe_mass: None,
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
+    },
 ];
 
 // Everyone gets these technologies
