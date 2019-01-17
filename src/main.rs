@@ -65,8 +65,11 @@ pub mod game {
         pub mod player;
         pub mod tech;
         pub mod race;
+        pub mod fleet;
         pub mod predefined {
             pub mod races;
+            pub mod messages;
+            pub mod planets;
         }
     }
     pub mod tutorial;
