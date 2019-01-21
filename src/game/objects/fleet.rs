@@ -21,6 +21,7 @@
  */
 use ::game::objects::tech::TechnologyId;
 use ::game::objects::universe::SpaceCoordinate;
+use ::std::cmp::Ordering;
 
 //std::fmt for strings
 
@@ -33,6 +34,7 @@ pub struct ShipSlot {
 #[derive(Serialize, Deserialize)]
 pub struct ShipDesign {
     pub id: u32,
+    pub name: String,
     pub base_hull: TechnologyId,
     pub slots: Option<[Option<ShipSlot>; 16]>
 }
@@ -49,3 +51,23 @@ pub struct Fleet {
     pub location: SpaceCoordinate,
     pub members: Vec<FleetMember>
 }
+
+impl PartialOrd for Fleet {
+    fn partial_cmp(&self, other: &Fleet) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for Fleet {
+    fn eq(&self, other: &Fleet) -> bool {
+        self.id == other.id
+    }
+}
+
+impl Ord for Fleet {
+    fn cmp(&self, other: &Fleet) -> Ordering {
+        self.id.cmp(&other.id)
+    }
+}
+
+impl Eq for Fleet {}

@@ -38,6 +38,7 @@ use ::game::objects::predefined::races::PredefinedRace;
 use ::game::objects::predefined::races::PredefinedCPURace;
 use ::game::objects::predefined::races::CPUDifficulty;
 
+use std::collections::HashMap;
 
 pub fn generate_tutorial_game() -> Game {
     let gid = Uuid::new_v4().to_string();
@@ -118,7 +119,8 @@ pub fn generate_tutorial_universe() -> Universe {
         mineral_packets: Vec::new(),
         salvage: Vec::new(),
         wormholes: Vec::new(),
-        planets: Vec::new() 
+        planets: Vec::new(),
+        fleets: HashMap::new()
     };
 
     let mut p = Planet::construct_with_defaults("Lever", 1, 26, 345);

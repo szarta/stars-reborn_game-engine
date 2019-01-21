@@ -37,6 +37,8 @@ use game::objects::tech::PACKET_PHYSICS_TECHNOLOGY;
 use game::objects::tech::SUPER_STEALTH_TECHNOLOGY;
 use game::objects::tech::HYPER_EXPANSION_TECHNOLOGY;
 use game::objects::tech::ALTERNATE_REALITY_TECHNOLOGY;
+use game::objects::planet::Planet;
+use game::objects::universe::Universe;
 use game::objects::universe::UniverseSize;
 
 pub const BASE_STARTING_PLANET_POPULATION : u32 = 25000;
@@ -60,7 +62,7 @@ impl PrimaryRacialTrait {
         match *self {
             PrimaryRacialTrait::ClaimAdjuster => 0,
             PrimaryRacialTrait::JackOfAllTrades => 1,
-            PrimaryRacialTrait::InterstellarTraveler => 2, 
+            PrimaryRacialTrait::InterstellarTraveler => 2,
             PrimaryRacialTrait::InnerStrength => 3,
             PrimaryRacialTrait::SpaceDemolition => 4,
             PrimaryRacialTrait::WarMonger => 5,
@@ -75,7 +77,7 @@ impl PrimaryRacialTrait {
         match *self {
             PrimaryRacialTrait::ClaimAdjuster => 0,
             PrimaryRacialTrait::JackOfAllTrades => 25,
-            PrimaryRacialTrait::InterstellarTraveler => -57, 
+            PrimaryRacialTrait::InterstellarTraveler => -57,
             PrimaryRacialTrait::InnerStrength => 36,
             PrimaryRacialTrait::SpaceDemolition => 53,
             PrimaryRacialTrait::WarMonger => -12,
@@ -90,7 +92,7 @@ impl PrimaryRacialTrait {
         match *self {
             PrimaryRacialTrait::ClaimAdjuster => CLAIM_ADJUSTER_TECHNOLOGY,
             PrimaryRacialTrait::JackOfAllTrades => JACK_OF_ALL_TRADES_TECHNOLOGY,
-            PrimaryRacialTrait::InterstellarTraveler => INTERSTELLAR_TRAVELER_TECHNOLOGY, 
+            PrimaryRacialTrait::InterstellarTraveler => INTERSTELLAR_TRAVELER_TECHNOLOGY,
             PrimaryRacialTrait::InnerStrength => INNER_STRENGTH_TECHNOLOGY,
             PrimaryRacialTrait::SpaceDemolition => SPACE_DEMOLITION_TECHNOLOGY,
             PrimaryRacialTrait::WarMonger => WAR_MONGER_TECHNOLOGY,
@@ -124,9 +126,9 @@ impl LesserRacialTrait {
     fn advantage_points(&self) -> i16 {
         match *self {
             LesserRacialTrait::NoRamscoopEngines => 53,
-            LesserRacialTrait::ImprovedFuelEfficiency => -78, 
+            LesserRacialTrait::ImprovedFuelEfficiency => -78,
             LesserRacialTrait::CheapEngines => 80,
-            LesserRacialTrait::TotalTerraforming => -140, 
+            LesserRacialTrait::TotalTerraforming => -140,
             LesserRacialTrait::OnlyBasicRemoteMining => 85,
             LesserRacialTrait::AdvancedRemoteMining => -53,
             LesserRacialTrait::NoAdvancedScanners => 95,
@@ -147,7 +149,7 @@ pub enum ResearchCost {
     Normal,
     Expensive
 }
- 
+
 #[derive(Serialize, Deserialize)]
 pub enum LeftoverPointsOption {
     SurfaceMinerals,
@@ -156,7 +158,7 @@ pub enum LeftoverPointsOption {
     Defenses,
     MineralConcentration
 }
- 
+
 #[derive(Serialize, Deserialize)]
 pub struct Race {
     pub name: String,
@@ -357,5 +359,21 @@ impl Race {
         }
 
         return techs;
+    }
+
+    pub fn generate_initial_ships(&self, universe: &Universe, homeworld: &Planet) {
+        match self.primary_racial_trait {
+            PrimaryRacialTrait::ClaimAdjuster => {},
+            PrimaryRacialTrait::JackOfAllTrades => {},
+            PrimaryRacialTrait::InterstellarTraveler => {},
+            PrimaryRacialTrait::InnerStrength => {},
+            PrimaryRacialTrait::SpaceDemolition => {},
+            PrimaryRacialTrait::WarMonger => {},
+            PrimaryRacialTrait::PacketPhysics => {},
+            PrimaryRacialTrait::SuperStealth => {},
+            PrimaryRacialTrait::HyperExpansion => {},
+            PrimaryRacialTrait::AlternateReality => {}
+        }
+
     }
 }

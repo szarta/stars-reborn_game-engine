@@ -22,8 +22,10 @@
 use ::game::objects::game::PlayerStartingDistance;
 use ::game::objects::player::Player;
 use ::game::objects::planet::Planet;
+use ::game::objects::fleet::ShipDesign;
 use rand;
 use rand::Rng;
+use std::collections::HashMap;
 
 #[derive(Serialize, Deserialize)]
 pub struct SpaceCoordinate {
@@ -247,7 +249,8 @@ pub struct Universe {
     pub salvage: Vec<Salvage>,
     pub minefields: Vec<Minefield>,
     pub mineral_packets: Vec<MineralPacket>,
-    pub planets: Vec<::game::objects::planet::Planet>
+    pub planets: Vec<::game::objects::planet::Planet>,
+    pub fleets: HashMap<u32, ::game::objects::fleet::Fleet>
 }
 
 impl Universe {
@@ -258,9 +261,15 @@ impl Universe {
             salvage: Vec::new(),
             minefields: Vec::new(),
             mineral_packets: Vec::new(),
-            planets: generate_random_planet_configuration(size, density, galaxy_clumping)
+            planets: generate_random_planet_configuration(size, density, galaxy_clumping),
+            fleets: HashMap::new()
         };
 
         return u;
+    }
+
+    pub fn add_fleet(&self, design: &ShipDesign, location: SpaceCoordinate, quantity: u16) {
+
+
     }
 }
