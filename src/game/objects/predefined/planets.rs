@@ -19,7 +19,7 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  *  DEALINGS IN THE SOFTWARE.
  */
-pub const ORIGINAL_GAME_NAMES : &'static [&'static str] = &[
+pub const ORIGINAL_GAME_PLANET_NAMES : &'static [&'static str] = &[
     "007",
     "14 Coli",
     "3M TA3",

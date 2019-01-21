@@ -19,50 +19,19 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  *  DEALINGS IN THE SOFTWARE.
  */
-use game::objects::tech::TechnologyId;
-use game::objects::fleet::ShipDesign;
+#[derive(Serialize, Deserialize, Copy, Clone)]
+pub enum ShipId {
+    SantaMaria = 0,
+    SporeCloud = 1
 
-/* 
- * Provided here are pre-defined ship archetypes.  Some notes:
- *  - these are meant to be cloned, thus const, their clones will be mutable
- *  - id will change as the design is cloned and given ownership to a player
- *  - engines of initial ships vary with tech capability (e.g. Fuel Mizer)
- *  - the names of ships for AI races vary with their race name
- */
-pub const SPORE_CLOUD = ShipDesign {
-    name: "Spore Cloud",
-    id: 0,
-    base_hull: TechnologyId::MiniColonyShip,
-    slots: Some([
-                Some(ShipSlot {
-                    tid: TechnologyId::SettlersDelight,
-                    amount: 1
-                }),
-                Some(ShipSlot {
-                    tid: TechnologyId::ColonizationModule,
-                    amount: 1
-                }),
-                None, None, None, None, None, None, None, None,
-                None, None, None, None, None, None
-            ])
-};
+}
 
-pub const SANTA_MARIA = ShipDesign {
-    name: "Santa Maria",
-    id: 0,
-    base_hull: TechnologyId::ColonyShip,
-    slots: Some([
-                Some(ShipSlot {
-                    tid: TechnologyId::QuickJump5,
-                    amount: 1
-                }),
-                Some(ShipSlot {
-                    tid: TechnologyId::ColonizationModule,
-                    amount: 1
-                }),
-                None, None, None, None, None, None, None, None,
-                None, None, None, None, None, None
-            ])
-};
+pub const ORIGINAL_GAME_SHIP_NAMES : &'static [&'static str] = &[
+    "Santa Maria",
+    "Spore Cloud"
 
+];
 
+pub const ORIGINAL_GAME_STARBASE_NAMES : &'static [&'static str] = &[
+    "Starbase"
+];

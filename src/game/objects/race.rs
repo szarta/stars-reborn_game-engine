@@ -361,19 +361,4 @@ impl Race {
         return techs;
     }
 
-    pub fn generate_initial_ships(&self, universe: &Universe, homeworld: &Planet) {
-        match self.primary_racial_trait {
-            PrimaryRacialTrait::ClaimAdjuster => {},
-            PrimaryRacialTrait::JackOfAllTrades => {},
-            PrimaryRacialTrait::InterstellarTraveler => {},
-            PrimaryRacialTrait::InnerStrength => {},
-            PrimaryRacialTrait::SpaceDemolition => {},
-            PrimaryRacialTrait::WarMonger => {},
-            PrimaryRacialTrait::PacketPhysics => {},
-            PrimaryRacialTrait::SuperStealth => {},
-            PrimaryRacialTrait::HyperExpansion => {},
-            PrimaryRacialTrait::AlternateReality => {}
-        }
-
-    }
 }

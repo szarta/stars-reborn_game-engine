@@ -70,6 +70,7 @@ pub mod game {
             pub mod races;
             pub mod messages;
             pub mod planets;
+            pub mod fleets;
         }
     }
     pub mod tutorial;

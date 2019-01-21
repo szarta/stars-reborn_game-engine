@@ -19,11 +19,19 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  *  DEALINGS IN THE SOFTWARE.
  */
-use ::game::objects::tech::ResearchField;
 use ::game::objects::race::Race;
+use ::game::objects::race::PrimaryRacialTrait;
+use ::game::objects::tech::ResearchField;
 use ::game::objects::tech::TechnologyId;
 use ::game::objects::tech::Technology;
 use ::game::objects::tech::TECHNOLOGY_DETAILS;
+use ::game::objects::universe::Universe;
+use ::game::objects::fleet::ShipDesign;
+use ::game::objects::fleet::ShipSlot;
+use ::game::objects::fleet::MAX_SHIP_DESIGNS;
+
+use ::game::objects::predefined::fleets::ShipId;
+use ::game::objects::predefined::fleets::ORIGINAL_GAME_SHIP_NAMES;
 
 #[derive(Serialize, Deserialize)]
 pub struct Player {
@@ -37,7 +45,8 @@ pub struct Player {
     pub current_research_field: ResearchField,
     pub next_research_field: ResearchField,
     pub available_tech_ids: Vec<TechnologyId>,
-    pub learned_tech_ids: Vec<TechnologyId>
+    pub learned_tech_ids: Vec<TechnologyId>,
+    pub ship_designs: [Option<ShipDesign>; MAX_SHIP_DESIGNS as usize]
 }
 
 impl Player {
@@ -59,8 +68,91 @@ impl Player {
             next_research_field: ResearchField::Energy,
 
             learned_tech_ids: learned_techs,
-            available_tech_ids: available_techs
+            available_tech_ids: available_techs,
+            ship_designs: [
+                None, None, None, None, None, None, None, None,
+                None, None, None, None, None, None, None, None ]
+
         }
+    }
+
+    pub fn get_next_available_ship_design_slot(&self) -> Option<u32> {
+        for i in 0..MAX_SHIP_DESIGNS {
+            if !Option::is_some(&self.ship_designs[i as usize]) {
+                return Some(i as u32);
+            }
+        }
+
+        return None;
+    }
+
+    pub fn get_ship_design_id(&self) -> Option<u32> {
+        let i = self.get_next_available_ship_design_slot();
+        match i {
+            Some(index) => {
+                return Some((self.id as u32 * MAX_SHIP_DESIGNS as u32) + index);
+            }
+            None => {
+                return None;
+            }
+        }
+    }
+
+    pub fn generate_initial_ship_designs(&self) {
+        match self.race.primary_racial_trait {
+            PrimaryRacialTrait::ClaimAdjuster => {},
+            PrimaryRacialTrait::JackOfAllTrades => {
+                let mut colonizer = ShipDesign {
+                    id: self.get_ship_design_id().unwrap(),
+                    name: ORIGINAL_GAME_SHIP_NAMES[ShipId::SantaMaria as usize].to_string(),
+                    base_hull: TechnologyId::ColonyShip,
+                    slots: Some([
+                        Some(ShipSlot {
+                            tid: TechnologyId::QuickJump5,
+                            amount: 1
+                        }),
+                        Some(ShipSlot {
+                            tid: TechnologyId::ColonizationModule,
+                            amount: 1
+                        }),
+                        None, None, None, None, None, None, None, None,
+                        None, None, None, None, None, None
+                    ])
+                };
+
+                //colonizer.id = self.id +
+            },
+            PrimaryRacialTrait::InterstellarTraveler => {},
+            PrimaryRacialTrait::InnerStrength => {},
+            PrimaryRacialTrait::SpaceDemolition => {},
+            PrimaryRacialTrait::WarMonger => {},
+            PrimaryRacialTrait::PacketPhysics => {},
+            PrimaryRacialTrait::SuperStealth => {},
+            PrimaryRacialTrait::HyperExpansion => {},
+            PrimaryRacialTrait::AlternateReality => {}
+        }
+    }
+
+    pub fn generate_initial_ships(&self, universe: &Universe) {
+
+        /*
+        match self.race.primary_racial_trait {
+            PrimaryRacialTrait::ClaimAdjuster => {},
+            PrimaryRacialTrait::JackOfAllTrades => {
+
+
+
+            },
+            PrimaryRacialTrait::InterstellarTraveler => {},
+            PrimaryRacialTrait::InnerStrength => {},
+            PrimaryRacialTrait::SpaceDemolition => {},
+            PrimaryRacialTrait::WarMonger => {},
+            PrimaryRacialTrait::PacketPhysics => {},
+            PrimaryRacialTrait::SuperStealth => {},
+            PrimaryRacialTrait::HyperExpansion => {},
+            PrimaryRacialTrait::AlternateReality => {}
+        }
+        */
     }
 }
 

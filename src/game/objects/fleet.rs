@@ -23,12 +23,30 @@ use ::game::objects::tech::TechnologyId;
 use ::game::objects::universe::SpaceCoordinate;
 use ::std::cmp::Ordering;
 
+pub const MAX_SHIP_DESIGNS : u8 = 16;
+
 //std::fmt for strings
 
 #[derive(Serialize, Deserialize)]
 pub struct ShipSlot {
     pub tid: TechnologyId,
     pub amount: u8
+}
+
+#[derive(Serialize, Deserialize)]
+pub enum ShipOrderType {
+    NoTask,
+    Load,
+    Unload,
+    Colonize,
+    Scrap,
+    Patrol
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct ShipOrder {
+    pub order_type: ShipOrderType,
+    pub amount: u16
 }
 
 #[derive(Serialize, Deserialize)]
@@ -48,7 +66,11 @@ pub struct FleetMember {
 #[derive(Serialize, Deserialize)]
 pub struct Fleet {
     pub id: u32,
+    pub owner_id: u8,
     pub location: SpaceCoordinate,
+    pub heading: SpaceCoordinate,
+    pub orders: Vec<ShipOrder>,
+    pub repeat_orders: bool,
     pub members: Vec<FleetMember>
 }
 
