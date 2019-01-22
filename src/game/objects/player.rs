@@ -98,12 +98,26 @@ impl Player {
         }
     }
 
-    pub fn generate_initial_ship_designs(&self) {
+    pub fn add_ship_design(&mut self, mut d: ShipDesign) -> bool {
+        match self.get_next_available_ship_design_slot() {
+            Some(index) => {
+                let id = self.get_ship_design_id().unwrap();
+                d.id = id;
+                self.ship_designs[id as usize] = Some(d);
+                return true;
+            }
+            None => {
+                return false;
+            }
+        }
+    }
+
+    pub fn generate_initial_ship_designs(&mut self) {
         match self.race.primary_racial_trait {
             PrimaryRacialTrait::ClaimAdjuster => {},
             PrimaryRacialTrait::JackOfAllTrades => {
-                let mut colonizer = ShipDesign {
-                    id: self.get_ship_design_id().unwrap(),
+                self.add_ship_design(ShipDesign {
+                    id: 0,
                     name: ORIGINAL_GAME_SHIP_NAMES[ShipId::SantaMaria as usize].to_string(),
                     base_hull: TechnologyId::ColonyShip,
                     slots: Some([
@@ -118,9 +132,7 @@ impl Player {
                         None, None, None, None, None, None, None, None,
                         None, None, None, None, None, None
                     ])
-                };
-
-                //colonizer.id = self.id +
+                });
             },
             PrimaryRacialTrait::InterstellarTraveler => {},
             PrimaryRacialTrait::InnerStrength => {},

@@ -48,6 +48,7 @@ pub fn generate_tutorial_game() -> Game {
     let p1_race = PredefinedRace::Humanoid.generate();
     let mut p1 = Player::construct_from_race(p1_race);
     p1.id = 0;
+    p1.generate_initial_ship_designs();
 
     u.planets[13].set_homeworld(&mut p1);
     u.planets[13].population = p1.race.calculate_starting_population(UniverseSize::Tiny);
@@ -257,7 +258,7 @@ pub fn generate_tutorial_universe() -> Universe {
     p.mineral_concentration.boranium = 44;
     p.mineral_concentration.germanium = 91;
     tut.planets.push(p);
- 
+
     p = Planet::construct_with_defaults("Alexander", 16, 263, 186);
     p.habitat.gravity = gravity_display_level_to_habitat_level("0.13");
     p.habitat.temperature = temperature_display_level_to_habitat_level("-76");
@@ -275,7 +276,7 @@ pub fn generate_tutorial_universe() -> Universe {
     p.mineral_concentration.boranium = 82;
     p.mineral_concentration.germanium = 62;
     tut.planets.push(p);
-    
+
     p = Planet::construct_with_defaults("Sea Squared", 18, 320, 294);
     p.habitat.gravity = gravity_display_level_to_habitat_level("0.33");
     p.habitat.temperature = temperature_display_level_to_habitat_level("-124");
@@ -284,7 +285,7 @@ pub fn generate_tutorial_universe() -> Universe {
     p.mineral_concentration.boranium = 96;
     p.mineral_concentration.germanium = 47;
     tut.planets.push(p);
-    
+
     p = Planet::construct_with_defaults("Red Storm", 19, 352, 254);
     p.habitat.gravity = gravity_display_level_to_habitat_level("1.56");
     p.habitat.temperature = temperature_display_level_to_habitat_level("-84");
@@ -293,7 +294,7 @@ pub fn generate_tutorial_universe() -> Universe {
     p.mineral_concentration.boranium = 71;
     p.mineral_concentration.germanium = 76;
     tut.planets.push(p);
-    
+
     p = Planet::construct_with_defaults("Mobius", 20, 366, 53);
     p.habitat.gravity = gravity_display_level_to_habitat_level("0.17");
     p.habitat.temperature = temperature_display_level_to_habitat_level("68");
@@ -302,7 +303,7 @@ pub fn generate_tutorial_universe() -> Universe {
     p.mineral_concentration.boranium = 72;
     p.mineral_concentration.germanium = 97;
     tut.planets.push(p);
- 
+
     p = Planet::construct_with_defaults("Castle", 21, 366, 15);
     p.habitat.gravity = gravity_display_level_to_habitat_level("0.13");
     p.habitat.temperature = temperature_display_level_to_habitat_level("172");
@@ -329,7 +330,7 @@ pub fn generate_tutorial_universe() -> Universe {
     p.mineral_concentration.boranium = 93;
     p.mineral_concentration.germanium = 50;
     tut.planets.push(p);
- 
+
     p = Planet::construct_with_defaults("Bloop", 24, 386, 218);
     p.habitat.gravity = gravity_display_level_to_habitat_level("1.44");
     p.habitat.temperature = temperature_display_level_to_habitat_level("136");
@@ -338,6 +339,6 @@ pub fn generate_tutorial_universe() -> Universe {
     p.mineral_concentration.boranium = 20;
     p.mineral_concentration.germanium = 62;
     tut.planets.push(p);
- 
+
     return tut;
 }
