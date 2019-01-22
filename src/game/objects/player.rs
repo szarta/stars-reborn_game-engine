@@ -76,7 +76,7 @@ impl Player {
         }
     }
 
-    pub fn get_next_available_ship_design_slot(&self) -> Option<u32> {
+    fn get_next_available_ship_design_slot(&self) -> Option<u32> {
         for i in 0..MAX_SHIP_DESIGNS {
             if !Option::is_some(&self.ship_designs[i as usize]) {
                 return Some(i as u32);
@@ -86,7 +86,7 @@ impl Player {
         return None;
     }
 
-    pub fn get_ship_design_id(&self) -> Option<u32> {
+    fn get_next_available_ship_design_id(&self) -> Option<u32> {
         let i = self.get_next_available_ship_design_slot();
         match i {
             Some(index) => {
@@ -101,7 +101,7 @@ impl Player {
     pub fn add_ship_design(&mut self, mut d: ShipDesign) -> bool {
         match self.get_next_available_ship_design_slot() {
             Some(index) => {
-                let id = self.get_ship_design_id().unwrap();
+                let id = self.get_next_available_ship_design_id().unwrap();
                 d.id = id;
                 self.ship_designs[id as usize] = Some(d);
                 return true;
