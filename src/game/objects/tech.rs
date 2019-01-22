@@ -139,7 +139,7 @@ pub struct TechnologyRequirement {
 }
 
 #[allow(non_camel_case_types)]
-#[derive(Serialize, Deserialize, Copy, Clone)]
+#[derive(Serialize, Deserialize, Copy, Clone, Eq, PartialEq)]
 pub enum TechnologyId {
     Viewer50 = 0,
     Viewer90 = 1,

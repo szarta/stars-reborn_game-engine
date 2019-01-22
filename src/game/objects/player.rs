@@ -31,7 +31,7 @@ use ::game::objects::fleet::ShipSlot;
 use ::game::objects::fleet::MAX_SHIP_DESIGNS;
 
 use ::game::objects::predefined::fleets::ShipId;
-use ::game::objects::predefined::fleets::ORIGINAL_GAME_SHIP_NAMES;
+use ::game::objects::predefined::fleets::construct_initial_ship_designs;
 
 #[derive(Serialize, Deserialize)]
 pub struct Player {
@@ -112,36 +112,58 @@ impl Player {
         }
     }
 
+    pub fn get_best_starting_engine(&self) -> TechnologyId {
+        if self.available_tech_ids.contains(&TechnologyId::FuelMizer) {
+            return TechnologyId::FuelMizer.clone();
+        }
+
+        if self.available_tech_ids.contains(&TechnologyId::LongHump6) {
+            return TechnologyId::LongHump6.clone();
+        }
+
+        return TechnologyId::QuickJump5.clone();
+    }
+
     pub fn generate_initial_ship_designs(&mut self) {
+        let best_engine = self.get_best_starting_engine();
+        let ship_designs = construct_initial_ship_designs(best_engine);
+
         match self.race.primary_racial_trait {
-            PrimaryRacialTrait::ClaimAdjuster => {},
-            PrimaryRacialTrait::JackOfAllTrades => {
-                self.add_ship_design(ShipDesign {
-                    id: 0,
-                    name: ORIGINAL_GAME_SHIP_NAMES[ShipId::SantaMaria as usize].to_string(),
-                    base_hull: TechnologyId::ColonyShip,
-                    slots: Some([
-                        Some(ShipSlot {
-                            tid: TechnologyId::QuickJump5,
-                            amount: 1
-                        }),
-                        Some(ShipSlot {
-                            tid: TechnologyId::ColonizationModule,
-                            amount: 1
-                        }),
-                        None, None, None, None, None, None, None, None,
-                        None, None, None, None, None, None
-                    ])
-                });
+            PrimaryRacialTrait::ClaimAdjuster => {
+                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
             },
-            PrimaryRacialTrait::InterstellarTraveler => {},
-            PrimaryRacialTrait::InnerStrength => {},
-            PrimaryRacialTrait::SpaceDemolition => {},
-            PrimaryRacialTrait::WarMonger => {},
-            PrimaryRacialTrait::PacketPhysics => {},
-            PrimaryRacialTrait::SuperStealth => {},
-            PrimaryRacialTrait::HyperExpansion => {},
-            PrimaryRacialTrait::AlternateReality => {}
+            PrimaryRacialTrait::JackOfAllTrades => {
+                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                self.add_ship_design(ship_designs[ShipId::LongRangeScout as usize].clone());
+                self.add_ship_design(ship_designs[ShipId::StalwartDefender as usize].clone());
+                self.add_ship_design(ship_designs[ShipId::Swashbuckler as usize].clone());
+                self.add_ship_design(ship_designs[ShipId::ArmedProbe as usize].clone());
+            },
+            PrimaryRacialTrait::InterstellarTraveler => {
+                self.add_ship_design(ship_designs[ShipId::Mayflower as usize].clone());
+            },
+            PrimaryRacialTrait::InnerStrength => {
+                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+            },
+            PrimaryRacialTrait::SpaceDemolition => {
+                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+            },
+            PrimaryRacialTrait::WarMonger => {
+                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+            },
+            PrimaryRacialTrait::PacketPhysics => {
+                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                self.add_ship_design(ship_designs[ShipId::LongRangeScout as usize].clone());
+            },
+            PrimaryRacialTrait::SuperStealth => {
+                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+            },
+            PrimaryRacialTrait::HyperExpansion => {
+                self.add_ship_design(ship_designs[ShipId::SporeCloud as usize].clone());
+            },
+            PrimaryRacialTrait::AlternateReality => {
+                self.add_ship_design(ship_designs[ShipId::Pinta as usize].clone());
+            }
         }
     }
 

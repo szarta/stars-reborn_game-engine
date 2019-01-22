@@ -27,7 +27,7 @@ pub const MAX_SHIP_DESIGNS : u8 = 16;
 
 //std::fmt for strings
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ShipSlot {
     pub tid: TechnologyId,
     pub amount: u8
@@ -40,7 +40,12 @@ pub enum ShipOrderType {
     Unload,
     Colonize,
     Scrap,
-    Patrol
+    Patrol,
+    RemoteMining,
+    LayMines,
+    Route,
+    Merge,
+    Transfer
 }
 
 #[derive(Serialize, Deserialize)]
@@ -49,9 +54,10 @@ pub struct ShipOrder {
     pub amount: u16
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ShipDesign {
     pub id: u32,
+    pub icon_index: u8,
     pub name: String,
     pub base_hull: TechnologyId,
     pub slots: Option<[Option<ShipSlot>; 16]>
@@ -69,6 +75,11 @@ pub struct Fleet {
     pub owner_id: u8,
     pub location: SpaceCoordinate,
     pub heading: SpaceCoordinate,
+    pub warp: u8,
+    pub current_fuel: u32,
+    // current damage level
+    // current fuel level
+    // cloaking??
     pub orders: Vec<ShipOrder>,
     pub repeat_orders: bool,
     pub members: Vec<FleetMember>
