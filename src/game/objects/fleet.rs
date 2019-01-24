@@ -51,7 +51,7 @@ pub enum ShipOrderType {
 #[derive(Serialize, Deserialize)]
 pub struct ShipOrder {
     pub order_type: ShipOrderType,
-    pub amount: u16
+    pub amount: Option<u16>
 }
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -72,17 +72,25 @@ pub struct FleetMember {
 #[derive(Serialize, Deserialize)]
 pub struct Fleet {
     pub id: u32,
-    pub owner_id: u8,
+    pub owner_id: Option<u8>,
     pub location: SpaceCoordinate,
-    pub heading: SpaceCoordinate,
-    pub warp: u8,
-    pub current_fuel: u32,
+    pub heading: Option<SpaceCoordinate>,
+    pub warp: Option<u8>,
+    //pub current_fuel: u32,
+    //pub total_cargo_capacity: Option<u32>,
     // current damage level
     // current fuel level
     // cloaking??
     pub orders: Vec<ShipOrder>,
     pub repeat_orders: bool,
     pub members: Vec<FleetMember>
+}
+
+impl Fleet {
+    /*
+    pub fn calculate_total_fuel_capacity(members : Vec<FleetMember>) -> u32 {
+    }
+    */
 }
 
 impl PartialOrd for Fleet {

@@ -175,6 +175,7 @@ impl Player {
             },
             PrimaryRacialTrait::JackOfAllTrades => {
                 self.add_ship_design(ship_designs[ShipId::ArmedProbe as usize].clone());
+
                 self.add_ship_design(ship_designs[ShipId::LongRangeScout as usize].clone());
                 self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
                 self.add_ship_design(ship_designs[ShipId::Teamster as usize].clone());

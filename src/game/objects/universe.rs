@@ -23,6 +23,10 @@ use ::game::objects::game::PlayerStartingDistance;
 use ::game::objects::player::Player;
 use ::game::objects::planet::Planet;
 use ::game::objects::fleet::ShipDesign;
+use ::game::objects::fleet::ShipOrder;
+use ::game::objects::fleet::ShipOrderType;
+use ::game::objects::fleet::Fleet;
+use ::game::objects::fleet::FleetMember;
 use rand;
 use rand::Rng;
 use std::collections::HashMap;
@@ -250,11 +254,14 @@ pub struct Universe {
     pub minefields: Vec<Minefield>,
     pub mineral_packets: Vec<MineralPacket>,
     pub planets: Vec<::game::objects::planet::Planet>,
-    pub fleets: HashMap<u32, ::game::objects::fleet::Fleet>
+    pub fleets: HashMap<u32, ::game::objects::fleet::Fleet>,
+    pub players: Vec<::game::objects::player::Player>
 }
 
+pub const MAX_FLEETS : u32 = 30000;
+
 impl Universe {
-    pub fn construct_random(size: &UniverseSize, density: &UniverseDensity, galaxy_clumping: &bool, players: &Vec<Player>, starting_distance: &PlayerStartingDistance) -> Universe {
+    pub fn construct_random(size: &UniverseSize, density: &UniverseDensity, galaxy_clumping: &bool, starting_distance: &PlayerStartingDistance) -> Universe {
         let u = Universe {
             boundary: get_coordinate_square(size.value()),
             wormholes: Vec::new(),
@@ -262,14 +269,61 @@ impl Universe {
             minefields: Vec::new(),
             mineral_packets: Vec::new(),
             planets: generate_random_planet_configuration(size, density, galaxy_clumping),
-            fleets: HashMap::new()
+            fleets: HashMap::new(),
+            players: Vec::new()
         };
 
         return u;
     }
 
-    pub fn add_fleet(&self, design: &ShipDesign, location: SpaceCoordinate, quantity: u16) {
+    pub fn get_new_fleet_id(&self) -> u32 {
+        let mut rng = rand::thread_rng();
+        let mut id : u32 = 0;
+
+        while self.fleets.contains_key(&id) {
+            let multiplier: f64 = rng.gen();
+            id = ((MAX_FLEETS as f64) * multiplier).round() as u32;
+        }
+
+        return id;
+    }
+
+    /*
+    pub fn lookup_ship_design(id : u32) -> &ShipDesign {
 
 
+
+    }
+    */
+
+    pub fn add_fleet(&mut self, design: &ShipDesign, location: SpaceCoordinate, quantity: u16) -> u32 {
+        let id : u32 = self.get_new_fleet_id();
+        let mut initial_orders = Vec::new();
+        initial_orders.push(ShipOrder {
+            order_type: ShipOrderType::NoTask,
+            amount: None
+        });
+
+        let mut members = Vec::new();
+        members.push(FleetMember {
+            design_id: design.id,
+            quantity: quantity
+        });
+
+        let f = Fleet {
+            id: id,
+            owner_id: None,
+            location: location,
+            heading: None,
+            warp: None,
+            repeat_orders: false,
+            orders: initial_orders,
+            members: members
+        };
+
+        let key = f.id.clone();
+        let ret = f.id.clone();
+        self.fleets.insert(key, f);
+        return ret;
     }
 }

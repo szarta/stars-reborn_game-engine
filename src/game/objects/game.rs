@@ -33,8 +33,7 @@ pub struct Game {
     pub name: String,
     pub year: u32,
     pub parameters: GameParameters,
-    pub universe: Universe,
-    pub players: Vec<Player>
+    pub universe: Universe
 }
 
 #[derive(Serialize, Deserialize)]
@@ -90,11 +89,10 @@ pub enum PlayerStartingDistance {
 impl Game {
     pub fn construct(name: String, players: Vec<Player>, parameters: GameParameters) -> Game {
         let gid = Uuid::new_v4().to_string();
-        let u = Universe::construct_random(&parameters.universe_size, &parameters.universe_density, &parameters.galaxy_clumping, &players, &parameters.player_starting_distance);
+        let u = Universe::construct_random(&parameters.universe_size, &parameters.universe_density, &parameters.galaxy_clumping, &parameters.player_starting_distance);
         Game {
             id: gid, 
             name: name,
-            players: players,
             year: STARTING_YEAR,
             parameters: parameters,
             universe: u

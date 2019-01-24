@@ -43,7 +43,6 @@ use std::collections::HashMap;
 pub fn generate_tutorial_game() -> Game {
     let gid = Uuid::new_v4().to_string();
     let mut u = generate_tutorial_universe();
-    let mut players = Vec::new();
 
     let p1_race = PredefinedRace::Humanoid.generate();
     let mut p1 = Player::construct_from_race(p1_race);
@@ -52,7 +51,6 @@ pub fn generate_tutorial_game() -> Game {
 
     u.planets[13].set_homeworld(&mut p1);
     u.planets[13].population = p1.race.calculate_starting_population(UniverseSize::Tiny);
-    players.push(p1);
 
     let mut p2_race = PredefinedCPURace::Robotoids.generate(CPUDifficulty::Expert);
     p2_race.name = "Berserker".to_string();
@@ -62,7 +60,10 @@ pub fn generate_tutorial_game() -> Game {
 
     u.planets[10].set_homeworld(&mut p2);
     u.planets[10].population = p2.race.calculate_starting_population(UniverseSize::Tiny);
-    players.push(p2);
+
+    u.players.push(p1);
+    u.players.push(p2);
+
 
     let vc = VictoryConditions {
         owns_percent_planets: false,
@@ -101,7 +102,6 @@ pub fn generate_tutorial_game() -> Game {
         id: gid,
         name: "Tutorial Game".to_string(),
         year: ::game::objects::game::STARTING_YEAR,
-        players: players,
         parameters: params,
         universe: u
     }
@@ -121,7 +121,8 @@ pub fn generate_tutorial_universe() -> Universe {
         salvage: Vec::new(),
         wormholes: Vec::new(),
         planets: Vec::new(),
-        fleets: HashMap::new()
+        fleets: HashMap::new(),
+        players: Vec::new()
     };
 
     let mut p = Planet::construct_with_defaults("Lever", 1, 26, 345);
