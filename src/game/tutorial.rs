@@ -48,7 +48,7 @@ pub fn generate_tutorial_game() -> Game {
     let p1_race = PredefinedRace::Humanoid.generate();
     let mut p1 = Player::construct_from_race(p1_race);
     p1.id = 0;
-    p1.generate_initial_ship_designs();
+    p1.generate_initial_ships(&mut u);
 
     u.planets[13].set_homeworld(&mut p1);
     u.planets[13].population = p1.race.calculate_starting_population(UniverseSize::Tiny);

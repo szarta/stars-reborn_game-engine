@@ -33,6 +33,11 @@ pub enum ShipId {
     Pinta = 5,
     Swashbuckler = 6,
     SporeCloud = 7,
+    Teamster = 8,
+    CottonPicker = 9,
+    SmaugarianPeepingTom = 10,
+    PotatoBug = 11,
+    ShadowTransport = 12,
 }
 
 pub const ORIGINAL_GAME_SHIP_NAMES : &'static [&'static str] = &[
@@ -44,13 +49,18 @@ pub const ORIGINAL_GAME_SHIP_NAMES : &'static [&'static str] = &[
     "Pinta",
     "Swashbuckler",
     "Spore Cloud",
+    "Teamster",
+    "Cotton Picker",
+    "Smaugarian Peeping Tom",
+    "Potato Bug",
+    "Shadow Transport",
 ];
 
 //pub const NUMBER_OF_ORIGINAL_SHIP_DESIGNS : usize = ORIGINAL_GAME_SHIP_NAMES.len();
-pub const NUMBER_OF_ORIGINAL_SHIP_DESIGNS : usize = 8;
+pub const NUMBER_OF_ORIGINAL_SHIP_DESIGNS : usize = 13;
 
 
-pub fn construct_initial_ship_designs(best_engine: TechnologyId) -> [ShipDesign; NUMBER_OF_ORIGINAL_SHIP_DESIGNS]  {
+pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: TechnologyId, best_shield: TechnologyId, best_scanner: TechnologyId) -> [ShipDesign; NUMBER_OF_ORIGINAL_SHIP_DESIGNS]  {
     let santa_maria = ShipDesign {
         id: 0,
         icon_index: 0,
@@ -70,6 +80,123 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId) -> [ShipDesign;
         ])
     };
 
+    let shadow_transport = ShipDesign {
+        id: 0,
+        icon_index: 0,
+        name: ORIGINAL_GAME_SHIP_NAMES[ShipId::ShadowTransport as usize].to_string(),
+        base_hull: TechnologyId::SmallFreighter,
+        slots: Some([
+            Some(ShipSlot {
+                tid: best_engine,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: best_shield,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: TechnologyId::TransportCloaking,
+                amount: 1
+            }),
+            None, None, None, None, None, None, None,
+            None, None, None, None, None, None
+        ])
+    };
+
+    let potato_bug = ShipDesign {
+        id: 0,
+        icon_index: 0,
+        name: ORIGINAL_GAME_SHIP_NAMES[ShipId::PotatoBug as usize].to_string(),
+        base_hull: TechnologyId::MidgetMiner,
+        slots: Some([
+            Some(ShipSlot {
+                tid: best_engine,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: TechnologyId::RoboMidgetMiner,
+                amount: 2
+            }),
+            None, None, None, None, None, None, None, None,
+            None, None, None, None, None, None
+        ])
+    };
+
+
+
+    let smaugarian_peeping_tom = ShipDesign {
+        id: 0,
+        icon_index: 0,
+        name: ORIGINAL_GAME_SHIP_NAMES[ShipId::SmaugarianPeepingTom as usize].to_string(),
+        base_hull: TechnologyId::Scout,
+        slots: Some([
+            Some(ShipSlot {
+                tid: best_engine,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: TechnologyId::FuelTank,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: TechnologyId::BatScanner,
+                amount: 1
+            }),
+            None, None, None, None, None, None, None,
+            None, None, None, None, None, None
+        ])
+    };
+
+    let teamster = ShipDesign {
+        id: 0,
+        icon_index: 0,
+        name: ORIGINAL_GAME_SHIP_NAMES[ShipId::Teamster as usize].to_string(),
+        base_hull: TechnologyId::MediumFreighter,
+        slots: Some([
+            Some(ShipSlot {
+                tid: best_engine,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: TechnologyId::Crobmnium,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: TechnologyId::BatScanner,
+                amount: 1
+            }),
+            None, None, None, None, None, None, None,
+            None, None, None, None, None, None
+        ])
+    };
+
+    let cotton_picker = ShipDesign {
+        id: 0,
+        icon_index: 1,
+        name: ORIGINAL_GAME_SHIP_NAMES[ShipId::CottonPicker as usize].to_string(),
+        base_hull: TechnologyId::MiniMiner,
+        slots: Some([
+            Some(ShipSlot {
+                tid: best_engine,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: TechnologyId::RoboMiniMiner,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: TechnologyId::RoboMiniMiner,
+                amount: 1
+            }),
+            Some(ShipSlot {
+                tid: TechnologyId::BatScanner,
+                amount: 1
+            }),
+            None, None, None, None, None, None,
+            None, None, None, None, None, None
+        ])
+    };
+
     let stalwart_defender = ShipDesign {
         id: 0,
         icon_index: 0,
@@ -81,7 +208,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId) -> [ShipDesign;
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::Laser,
+                tid: best_laser,
                 amount: 1
             }),
             Some(ShipSlot {
@@ -124,7 +251,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId) -> [ShipDesign;
                 amount: 2
             }),
             Some(ShipSlot {
-                tid: TechnologyId::Laser,
+                tid: best_laser,
                 amount: 1
             }),
             Some(ShipSlot {
@@ -174,7 +301,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId) -> [ShipDesign;
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::XrayLaser,
+                tid: best_laser,
                 amount: 1
             }),
             Some(ShipSlot {
@@ -226,7 +353,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId) -> [ShipDesign;
 
     let mayflower = ShipDesign {
         id: 0,
-        icon_index: 0,
+        icon_index: 2,
         name: ORIGINAL_GAME_SHIP_NAMES[ShipId::Mayflower as usize].to_string(),
         base_hull: TechnologyId::ColonyShip,
         slots: Some([
@@ -243,8 +370,6 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId) -> [ShipDesign;
         ])
     };
 
-
-
     return [
         santa_maria, 
         armed_probe, 
@@ -254,6 +379,11 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId) -> [ShipDesign;
         pinta,
         swashbuckler,
         spore_cloud,
+        teamster,
+        cotton_picker,
+        smaugarian_peeping_tom,
+        potato_bug,
+        shadow_transport
     ];
 }
 
