@@ -79,7 +79,7 @@ pub enum PredefinedCPURace {
     Automitrons,
     Robotils,
     Cybertrons,
-    Macinti 
+    Macinti
 }
 
 impl PredefinedCPURace {
@@ -526,7 +526,7 @@ pub fn create_he(difficulty: CPUDifficulty ) -> Race {
             colonists_operate_mines = 10;
         }
     }
- 
+
     Race {
         name: name.to_string(),
         plural_name: plural_name.to_string(),
@@ -681,7 +681,7 @@ pub fn create_ss(difficulty: CPUDifficulty) -> Race {
             colonists_operate_mines = 8;
         }
     }
- 
+
     Race {
         name: name.to_string(),
         plural_name: plural_name.to_string(),
@@ -718,7 +718,142 @@ pub fn create_ss(difficulty: CPUDifficulty) -> Race {
 }
 
 pub fn create_is(difficulty: CPUDifficulty) -> Race {
-    return create_he(difficulty);
+    let (name, plural_name) = generate_random_race_name();
+
+    let mut lrt: Vec<LesserRacialTrait> = Vec::new();
+    lrt.push(LesserRacialTrait::GeneralizedResearch);
+    lrt.push(LesserRacialTrait::OnlyBasicRemoteMining);
+    lrt.push(LesserRacialTrait::NoAdvancedScanners);
+    lrt.push(LesserRacialTrait::LowStartingPopulation);
+
+    let research_costs: [ResearchCost; 6] = [
+        ResearchCost::Expensive,
+        ResearchCost::Expensive,
+        ResearchCost::Expensive,
+        ResearchCost::Expensive,
+        ResearchCost::Expensive,
+        ResearchCost::Expensive
+    ];
+
+    let gravity_min = gravity_display_level_to_habitat_level("0.15");
+    let gravity_max = gravity_display_level_to_habitat_level("1.52");
+    let temp_min;
+    let temp_max;
+    let mut temp_immune = false;
+    let rad_min;
+    let rad_max;
+    let factory_production;
+    let factory_cost;
+    let colonists_operate_factories;
+    let mine_cost;
+    let mine_production;
+    let colonists_operate_mines;
+    let mut factory_cheap_germanium = false;
+    let mut growth_rate = 15;
+    let expensive_tech_boost = true;
+    let resource_production;
+
+    match difficulty {
+        CPUDifficulty::Expert => {
+            temp_immune = true;
+            temp_min = 0;
+            temp_max = 100;
+            rad_min = radiation_display_level_to_habitat_level("0");
+            rad_max = radiation_display_level_to_habitat_level("100");
+
+            resource_production = 800;
+            factory_production = 14;
+            factory_cost = 9;
+            colonists_operate_factories = 14;
+            mine_production = 14;
+            mine_cost = 5;
+            colonists_operate_mines = 14;
+            factory_cheap_germanium = true;
+            growth_rate = 16;
+        },
+        CPUDifficulty::Tough => {
+            temp_min = temperature_display_level_to_habitat_level("-96");
+            temp_max = temperature_display_level_to_habitat_level("176");
+            rad_min = radiation_display_level_to_habitat_level("5");
+            rad_max = radiation_display_level_to_habitat_level("71");
+
+            resource_production = 800;
+            factory_production = 14;
+            factory_cost = 9;
+            colonists_operate_factories = 15;
+            mine_production = 14;
+            mine_cost = 5;
+            colonists_operate_mines = 15;
+            factory_cheap_germanium = true;
+        },
+        CPUDifficulty::Standard => {
+            lrt.push(LesserRacialTrait::CheapEngines);
+
+            temp_min = temperature_display_level_to_habitat_level("-96");
+            temp_max = temperature_display_level_to_habitat_level("176");
+            rad_min = radiation_display_level_to_habitat_level("5");
+            rad_max = radiation_display_level_to_habitat_level("71");
+
+            resource_production = 800;
+            factory_production = 13;
+            factory_cost = 9;
+            colonists_operate_factories = 14;
+            mine_production = 10;
+            mine_cost = 6;
+            colonists_operate_mines = 14;
+            factory_cheap_germanium = true;
+        },
+        CPUDifficulty::Easy => {
+            lrt.push(LesserRacialTrait::CheapEngines);
+
+            temp_min = temperature_display_level_to_habitat_level("-96");
+            temp_max = temperature_display_level_to_habitat_level("176");
+            rad_min = radiation_display_level_to_habitat_level("5");
+            rad_max = radiation_display_level_to_habitat_level("71");
+
+            resource_production = 900;
+            factory_production = 11;
+            factory_cost = 10;
+            colonists_operate_factories = 14;
+            mine_production = 11;
+            mine_cost = 6;
+            colonists_operate_mines = 14;
+        }
+    }
+
+    Race {
+        name: name.to_string(),
+        plural_name: plural_name.to_string(),
+        primary_racial_trait: PrimaryRacialTrait::InnerStrength,
+        lesser_racial_traits: lrt,
+        gravity_immune: false,
+        gravity_min: gravity_min,
+        gravity_max: gravity_max,
+
+        temperature_immune: temp_immune,
+        temperature_min: temp_min,
+        temperature_max: temp_max,
+
+        radiation_immune: false,
+        radiation_min: rad_min,
+        radiation_max: rad_max,
+
+        resource_production: resource_production,
+        factory_production: factory_production,
+        factory_cost: factory_cost,
+        colonists_operate_factories: colonists_operate_factories,
+        mine_cost: mine_cost,
+        mine_production: mine_production,
+        colonists_operate_mines: colonists_operate_mines,
+        factory_cheap_germanium: factory_cheap_germanium,
+        growth_rate: growth_rate,
+
+        research_costs: research_costs,
+        expensive_tech_boost: expensive_tech_boost,
+        leftover_points: LeftoverPointsOption::MineralConcentration,
+        advantage_points: 0,
+        icon_index: 2,
+    }
 }
 
 pub fn create_ca(difficulty: CPUDifficulty) -> Race {
@@ -732,5 +867,3 @@ pub fn create_pp(difficulty: CPUDifficulty) -> Race {
 pub fn create_ar(difficulty: CPUDifficulty) -> Race {
     return create_he(difficulty);
 }
-
- 
