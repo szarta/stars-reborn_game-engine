@@ -89,7 +89,8 @@ pub enum PlayerStartingDistance {
 impl Game {
     pub fn construct(name: String, players: Vec<Player>, parameters: GameParameters) -> Game {
         let gid = Uuid::new_v4().to_string();
-        let u = Universe::construct_random(&parameters.universe_size, &parameters.universe_density, &parameters.galaxy_clumping, &parameters.player_starting_distance);
+        let mut u = Universe::construct_random(&parameters.universe_size, &parameters.universe_density, &parameters.galaxy_clumping, &parameters.player_starting_distance);
+        u.players = players;
         Game {
             id: gid, 
             name: name,

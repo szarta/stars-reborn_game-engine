@@ -117,8 +117,6 @@ impl PredefinedRace {
     }
 }
 
-
-
 pub fn create_antethereal() -> Race {
     let mut lrt: Vec<LesserRacialTrait> = Vec::new();
     lrt.push(LesserRacialTrait::NoRamscoopEngines);
@@ -218,6 +216,7 @@ pub fn create_humanoid() -> Race {
         icon_index: 15,
     }
 }
+
 pub fn create_insectoid() -> Race {
     let mut lrt: Vec<LesserRacialTrait> = Vec::new();
     lrt.push(LesserRacialTrait::CheapEngines);
@@ -270,6 +269,7 @@ pub fn create_insectoid() -> Race {
         icon_index: 7,
     }
 }
+
 pub fn create_nucleotid() -> Race {
     let mut lrt: Vec<LesserRacialTrait> = Vec::new();
     lrt.push(LesserRacialTrait::AdvancedRemoteMining);
@@ -374,6 +374,7 @@ pub fn create_rabbitoid() -> Race {
         icon_index: 1,
     }
 }
+
 pub fn create_silicanoid() -> Race {
     let mut lrt: Vec<LesserRacialTrait> = Vec::new();
     lrt.push(LesserRacialTrait::ImprovedFuelEfficiency);
@@ -433,21 +434,8 @@ pub fn create_he(difficulty: CPUDifficulty ) -> Race {
     let (name, plural_name) = generate_random_race_name();
 
     let mut lrt: Vec<LesserRacialTrait> = Vec::new();
-    match difficulty {
-        CPUDifficulty::Expert | CPUDifficulty::Tough | CPUDifficulty::Standard => {
-            lrt.push(LesserRacialTrait::ImprovedFuelEfficiency);
-            lrt.push(LesserRacialTrait::UltimateRecycling);
-            lrt.push(LesserRacialTrait::MineralAlchemy);
-            lrt.push(LesserRacialTrait::OnlyBasicRemoteMining);
-        }
-        CPUDifficulty::Easy => {
-            lrt.push(LesserRacialTrait::ImprovedFuelEfficiency);
-            lrt.push(LesserRacialTrait::MineralAlchemy);
-            lrt.push(LesserRacialTrait::CheapEngines);
-            lrt.push(LesserRacialTrait::OnlyBasicRemoteMining);
-            lrt.push(LesserRacialTrait::BleedingEdgeTechnology);
-        }
-    }
+    lrt.push(LesserRacialTrait::ImprovedFuelEfficiency);
+    lrt.push(LesserRacialTrait::MineralAlchemy);
 
     let mut research_costs: [ResearchCost; 6] = [
         ResearchCost::Normal,
@@ -458,21 +446,84 @@ pub fn create_he(difficulty: CPUDifficulty ) -> Race {
         ResearchCost::Normal
     ];
 
+    let factory_production;
+    let factory_cost;
+    let colonists_operate_factories;
+    let mine_cost;
+    let mine_production;
+    let colonists_operate_mines;
+    let mut factory_cheap_germanium = false;
+    let mut growth_rate = 5;
+    let expensive_tech_boost = false;
+    let resource_production;
+
     match difficulty {
         CPUDifficulty::Expert => {
+            lrt.push(LesserRacialTrait::OnlyBasicRemoteMining);
+
             research_costs[ResearchField::Construction.value()] = ResearchCost::Cheap;
             research_costs[ResearchField::Weapons.value()] = ResearchCost::Cheap;
             research_costs[ResearchField::Biotechnology.value()] = ResearchCost::Expensive;
+
+            resource_production = 800;
+            factory_production = 13;
+            factory_cost = 9;
+            colonists_operate_factories = 16;
+            mine_production = 10;
+            mine_cost = 4;
+            colonists_operate_mines = 8;
+            factory_cheap_germanium = true;
+            growth_rate = 7;
         },
         CPUDifficulty::Tough => {
+            lrt.push(LesserRacialTrait::OnlyBasicRemoteMining);
+
+            research_costs[ResearchField::Propulsion.value()] = ResearchCost::Cheap;
             research_costs[ResearchField::Construction.value()] = ResearchCost::Cheap;
             research_costs[ResearchField::Weapons.value()] = ResearchCost::Cheap;
-            research_costs[ResearchField::Propulsion.value()] = ResearchCost::Cheap;
             research_costs[ResearchField::Biotechnology.value()] = ResearchCost::Expensive;
+
+            resource_production = 800;
+            factory_production = 13;
+            factory_cost = 9;
+            colonists_operate_factories = 18;
+            mine_production = 10;
+            mine_cost = 4;
+            colonists_operate_mines = 12;
+            factory_cheap_germanium = true;
+            growth_rate = 6;
         },
-        CPUDifficulty::Standard | CPUDifficulty::Easy => {
+        CPUDifficulty::Standard => {
+            lrt.push(LesserRacialTrait::CheapEngines);
+            lrt.push(LesserRacialTrait::OnlyBasicRemoteMining);
+
             research_costs[ResearchField::Propulsion.value()] = ResearchCost::Cheap;
             research_costs[ResearchField::Biotechnology.value()] = ResearchCost::Expensive;
+
+            resource_production = 900;
+            factory_production = 13;
+            factory_cost = 9;
+            colonists_operate_factories = 16;
+            mine_production = 10;
+            mine_cost = 4;
+            colonists_operate_mines = 11;
+            growth_rate = 6;
+        },
+        CPUDifficulty::Easy => {
+            lrt.push(LesserRacialTrait::CheapEngines);
+            lrt.push(LesserRacialTrait::OnlyBasicRemoteMining);
+            lrt.push(LesserRacialTrait::BleedingEdgeTechnology);
+
+            research_costs[ResearchField::Propulsion.value()] = ResearchCost::Cheap;
+            research_costs[ResearchField::Biotechnology.value()] = ResearchCost::Expensive;
+
+            resource_production = 1000;
+            factory_production = 12;
+            factory_cost = 10;
+            colonists_operate_factories = 16;
+            mine_production = 10;
+            mine_cost = 5;
+            colonists_operate_mines = 10;
         }
     }
  
@@ -482,35 +533,33 @@ pub fn create_he(difficulty: CPUDifficulty ) -> Race {
         primary_racial_trait: PrimaryRacialTrait::HyperExpansion,
         lesser_racial_traits: lrt,
         gravity_immune: true,
-        gravity_min: gravity_display_level_to_habitat_level("0.17"),
-        gravity_max: gravity_display_level_to_habitat_level("1.24"),
+        gravity_min: 0,
+        gravity_max: 100,
 
         temperature_immune: true,
-        temperature_min: temperature_display_level_to_habitat_level("-60"),
-        temperature_max: temperature_display_level_to_habitat_level("124"),
+        temperature_min: 0,
+        temperature_max: 100,
 
         radiation_immune: true,
-        radiation_min: radiation_display_level_to_habitat_level("13"),
-        radiation_max: radiation_display_level_to_habitat_level("53"),
+        radiation_min: 0,
+        radiation_max: 100,
 
-        resource_production: 800,
-        factory_production: 12,
-        factory_cost: 12,
-        mine_cost: 9,
-        mine_production: 10,
-        colonists_operate_mines: 10,
-        colonists_operate_factories: 15,
-        factory_cheap_germanium: true,
-        growth_rate: 6,
+        resource_production: resource_production,
+        factory_production: factory_production,
+        factory_cost: factory_cost,
+        colonists_operate_factories: colonists_operate_factories,
+        mine_cost: mine_cost,
+        mine_production: mine_production,
+        colonists_operate_mines: colonists_operate_mines,
+        factory_cheap_germanium: factory_cheap_germanium,
+        growth_rate: growth_rate,
 
         research_costs: research_costs,
-        expensive_tech_boost: false,
-        leftover_points: LeftoverPointsOption::Factories,
+        expensive_tech_boost: expensive_tech_boost,
+        leftover_points: LeftoverPointsOption::SurfaceMinerals,
         advantage_points: 0,
         icon_index: 3,
     }
-
-
 }
 
 pub fn create_ss(difficulty: CPUDifficulty) -> Race {
@@ -531,23 +580,23 @@ pub fn create_ss(difficulty: CPUDifficulty) -> Race {
         ResearchCost::Normal
     ];
 
-    let mut gravity_min = 0;
-    let mut gravity_max = 0;
-    let mut temp_min = 0;
-    let mut temp_max = 0;
+    let gravity_min;
+    let gravity_max;
+    let temp_min;
+    let temp_max;
     let mut rad_min = 0;
     let mut rad_max = 0;
     let mut rad_immune = false;
-    let mut factory_production = 0;
-    let mut factory_cost = 0;
-    let mut colonists_operate_factories = 0;
-    let mut mine_cost = 0;
-    let mut mine_production = 0;
-    let mut colonists_operate_mines = 0;
+    let factory_production;
+    let factory_cost;
+    let colonists_operate_factories;
+    let mine_cost;
+    let mine_production;
+    let colonists_operate_mines;
     let mut factory_cheap_germanium = false;
     let mut growth_rate = 14;
     let mut expensive_tech_boost = false;
-    let mut resource_production = 0;
+    let resource_production;
 
     match difficulty {
         CPUDifficulty::Expert => {
@@ -664,7 +713,7 @@ pub fn create_ss(difficulty: CPUDifficulty) -> Race {
         expensive_tech_boost: expensive_tech_boost,
         leftover_points: LeftoverPointsOption::SurfaceMinerals,
         advantage_points: 0,
-        icon_index: 3,
+        icon_index: 2,
     }
 }
 
