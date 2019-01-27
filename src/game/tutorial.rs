@@ -53,7 +53,7 @@ pub fn generate_tutorial_game() -> Game {
 
     u.players.push(p1);
 
-    let mut p2_race = PredefinedCPURace::Robotoids.generate(CPUDifficulty::Expert);
+    let mut p2_race = PredefinedCPURace::Turindrones.generate(CPUDifficulty::Easy);
     p2_race.name = "Berserker".to_string();
     p2_race.plural_name = "Berserkers".to_string();
     let mut p2 = Player::construct_from_race(p2_race);
