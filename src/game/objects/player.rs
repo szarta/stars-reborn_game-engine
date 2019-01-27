@@ -20,19 +20,13 @@
  *  DEALINGS IN THE SOFTWARE.
  */
 use ::game::objects::race::Race;
-use ::game::objects::race::PrimaryRacialTrait;
-use ::game::objects::race::LesserRacialTrait;
 use ::game::objects::tech::ResearchField;
 use ::game::objects::tech::TechnologyId;
 use ::game::objects::tech::Technology;
 use ::game::objects::tech::TECHNOLOGY_DETAILS;
-use ::game::objects::universe::Universe;
 use ::game::objects::fleet::ShipDesign;
-use ::game::objects::fleet::ShipSlot;
 use ::game::objects::fleet::MAX_SHIP_DESIGNS;
 
-use ::game::objects::predefined::fleets::ShipId;
-use ::game::objects::predefined::fleets::construct_initial_ship_designs;
 
 #[derive(Serialize, Deserialize)]
 pub struct Player {
@@ -104,7 +98,7 @@ impl Player {
             Some(index) => {
                 let id = self.get_next_available_ship_design_id().unwrap();
                 d.id = id;
-                self.ship_designs[id as usize] = Some(d);
+                self.ship_designs[index as usize] = Some(d);
                 return true;
             }
             None => {
@@ -113,7 +107,7 @@ impl Player {
         }
     }
 
-    fn get_best_starting_scanner(&self) -> TechnologyId {
+    pub fn get_best_starting_scanner(&self) -> TechnologyId {
         if self.available_tech_ids.contains(&TechnologyId::PossumScanner) {
             return TechnologyId::PossumScanner.clone();
         }
@@ -121,7 +115,7 @@ impl Player {
         return TechnologyId::BatScanner.clone();
     }
 
-    fn get_best_starting_shield(&self) -> TechnologyId {
+    pub fn get_best_starting_shield(&self) -> TechnologyId {
         if self.available_tech_ids.contains(&TechnologyId::CowhideShield) {
             return TechnologyId::CowhideShield.clone();
         }
@@ -129,7 +123,7 @@ impl Player {
         return TechnologyId::MoleskinShield.clone();
     }
 
-    fn get_best_starting_laser(&self) -> TechnologyId {
+    pub fn get_best_starting_laser(&self) -> TechnologyId {
         if self.available_tech_ids.contains(&TechnologyId::YakimoraLightPhaser) {
             return TechnologyId::YakimoraLightPhaser.clone();
         }
@@ -141,7 +135,7 @@ impl Player {
         return TechnologyId::Laser;
     }
 
-    fn get_best_starting_engine(&self) -> TechnologyId {
+    pub fn get_best_starting_engine(&self) -> TechnologyId {
         if self.available_tech_ids.contains(&TechnologyId::AlphaDrive8) {
             return TechnologyId::AlphaDrive8.clone();
         }
@@ -159,64 +153,6 @@ impl Player {
         }
 
         return TechnologyId::QuickJump5.clone();
-    }
-
-    pub fn generate_initial_ships(&mut self, universe: &mut Universe) {
-        let best_engine = self.get_best_starting_engine();
-        let best_laser = self.get_best_starting_laser();
-        let best_shield = self.get_best_starting_shield();
-        let best_scanner = self.get_best_starting_scanner();
-        let ship_designs = construct_initial_ship_designs(best_engine, best_laser, best_shield, best_scanner);
-
-        match self.race.primary_racial_trait {
-            PrimaryRacialTrait::ClaimAdjuster => {
-                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
-
-            },
-            PrimaryRacialTrait::JackOfAllTrades => {
-                self.add_ship_design(ship_designs[ShipId::ArmedProbe as usize].clone());
-
-                self.add_ship_design(ship_designs[ShipId::LongRangeScout as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::Teamster as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::StalwartDefender as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::CottonPicker as usize].clone());
-            },
-            PrimaryRacialTrait::InterstellarTraveler => {
-                self.add_ship_design(ship_designs[ShipId::SmaugarianPeepingTom as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::Mayflower as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::StalwartDefender as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::Swashbuckler as usize].clone());
-            },
-            PrimaryRacialTrait::InnerStrength => {
-                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
-            },
-            PrimaryRacialTrait::SpaceDemolition => {
-                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
-            },
-            PrimaryRacialTrait::WarMonger => {
-                self.add_ship_design(ship_designs[ShipId::ArmedProbe as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
-            },
-            PrimaryRacialTrait::PacketPhysics => {
-                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::LongRangeScout as usize].clone());
-            },
-            PrimaryRacialTrait::SuperStealth => {
-                self.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
-                self.add_ship_design(ship_designs[ShipId::ShadowTransport as usize].clone());
-            },
-            PrimaryRacialTrait::HyperExpansion => {
-                self.add_ship_design(ship_designs[ShipId::SporeCloud as usize].clone());
-            },
-            PrimaryRacialTrait::AlternateReality => {
-                self.add_ship_design(ship_designs[ShipId::Pinta as usize].clone());
-            }
-        }
-
-        if self.race.lesser_racial_traits.contains(&LesserRacialTrait::AdvancedRemoteMining) {
-            self.add_ship_design(ship_designs[ShipId::PotatoBug as usize].clone());
-        }
     }
 }
 

@@ -20,18 +20,22 @@
  *  DEALINGS IN THE SOFTWARE.
  */
 use ::game::objects::game::PlayerStartingDistance;
-use ::game::objects::player::Player;
 use ::game::objects::planet::Planet;
 use ::game::objects::fleet::ShipDesign;
 use ::game::objects::fleet::ShipOrder;
 use ::game::objects::fleet::ShipOrderType;
 use ::game::objects::fleet::Fleet;
 use ::game::objects::fleet::FleetMember;
+use ::game::objects::fleet::MAX_SHIP_DESIGNS;
 use rand;
 use rand::Rng;
 use std::collections::HashMap;
+use ::game::objects::predefined::fleets::construct_initial_ship_designs;
+use ::game::objects::predefined::fleets::ShipId;
+use ::game::objects::race::PrimaryRacialTrait;
+use ::game::objects::race::LesserRacialTrait;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct SpaceCoordinate {
     pub x: u16,
     pub y: u16
@@ -288,15 +292,29 @@ impl Universe {
         return id;
     }
 
-    /*
-    pub fn lookup_ship_design(id : u32) -> &ShipDesign {
+    pub fn lookup_ship_design(&self, id : u32) -> Option<ShipDesign> {
+        let pid = id / (MAX_SHIP_DESIGNS as u32);
+        let offset = id % (MAX_SHIP_DESIGNS as u32);
+        info!("id:{}, pid:{}, offset:{}", id, pid, offset);
 
+        let p = &self.players[pid as usize];
+        let design = &p.ship_designs[offset as usize];
 
-
+        match design {
+            Some(d) => { Some(d.clone()) }
+            None => { None }
+        }
     }
-    */
 
-    pub fn add_fleet(&mut self, design: &ShipDesign, location: SpaceCoordinate, quantity: u16) -> u32 {
+    pub fn add_fleet_at_planet(&mut self, design: &ShipDesign, owner: Option<u8>, planet_id: u32, quantity: u16) -> u32 {
+        let location = self.planets[planet_id as usize].location.clone();
+        let fleet_id = self.add_fleet(design, owner, location, quantity);
+
+        self.planets[planet_id as usize].related_fleets.push(fleet_id);
+        return fleet_id;
+    }
+
+    pub fn add_fleet(&mut self, design: &ShipDesign, owner: Option<u8>, location: SpaceCoordinate, quantity: u16) -> u32 {
         let id : u32 = self.get_new_fleet_id();
         let mut initial_orders = Vec::new();
         initial_orders.push(ShipOrder {
@@ -310,12 +328,16 @@ impl Universe {
             quantity: quantity
         });
 
+        let total_fuel = Fleet::calculate_total_fuel_capacity(self, &members);
+
         let f = Fleet {
             id: id,
-            owner_id: None,
+            owner_id: owner,
             location: location,
             heading: None,
             warp: None,
+            current_fuel: total_fuel.clone(),
+            total_fuel_capacity: total_fuel.clone(),
             repeat_orders: false,
             orders: initial_orders,
             members: members
@@ -325,5 +347,83 @@ impl Universe {
         let ret = f.id.clone();
         self.fleets.insert(key, f);
         return ret;
+    }
+
+    pub fn generate_initial_ships(&mut self) {
+        let mut ship_queue = Vec::new();
+
+        for p in self.players.iter_mut() {
+            let best_engine = p.get_best_starting_engine();
+            let best_laser = p.get_best_starting_laser();
+            let best_shield = p.get_best_starting_shield();
+            let best_scanner = p.get_best_starting_scanner();
+            let ship_designs = construct_initial_ship_designs(best_engine, best_laser, best_shield, best_scanner);
+
+            match p.race.primary_racial_trait {
+                PrimaryRacialTrait::ClaimAdjuster => {
+                    p.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                    ship_queue.push((p.ship_designs[0].clone().unwrap(), p.id, p.homeworld_id, 1));
+                },
+                PrimaryRacialTrait::JackOfAllTrades => {
+                    p.add_ship_design(ship_designs[ShipId::ArmedProbe as usize].clone());
+                    p.add_ship_design(ship_designs[ShipId::LongRangeScout as usize].clone());
+                    p.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                    p.add_ship_design(ship_designs[ShipId::Teamster as usize].clone());
+                    p.add_ship_design(ship_designs[ShipId::StalwartDefender as usize].clone());
+                    p.add_ship_design(ship_designs[ShipId::CottonPicker as usize].clone());
+
+                    ship_queue.push((p.ship_designs[0].clone().unwrap(), p.id, p.homeworld_id, 1));
+                    ship_queue.push((p.ship_designs[1].clone().unwrap(), p.id, p.homeworld_id, 1));
+                    ship_queue.push((p.ship_designs[2].clone().unwrap(), p.id, p.homeworld_id, 1));
+                    ship_queue.push((p.ship_designs[3].clone().unwrap(), p.id, p.homeworld_id, 1));
+                    ship_queue.push((p.ship_designs[4].clone().unwrap(), p.id, p.homeworld_id, 1));
+                    ship_queue.push((p.ship_designs[5].clone().unwrap(), p.id, p.homeworld_id, 1));
+                }
+    
+                PrimaryRacialTrait::InterstellarTraveler => {
+                    /*
+                    *p.add_ship_design(ship_designs[ShipId::SmaugarianPeepingTom as usize].clone());
+                    *p.add_ship_design(ship_designs[ShipId::Mayflower as usize].clone());
+                    *p.add_ship_design(ship_designs[ShipId::StalwartDefender as usize].clone());
+                    *p.add_ship_design(ship_designs[ShipId::Swashbuckler as usize].clone());
+                    */
+                },
+                PrimaryRacialTrait::InnerStrength => {
+                    //*p.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                },
+                PrimaryRacialTrait::SpaceDemolition => {
+                    //*p.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                },
+                PrimaryRacialTrait::WarMonger => {
+                    //*p.add_ship_design(ship_designs[ShipId::ArmedProbe as usize].clone());
+                    //*p.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                },
+                PrimaryRacialTrait::PacketPhysics => {
+                    //*p.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                    //*p.add_ship_design(ship_designs[ShipId::LongRangeScout as usize].clone());
+                },
+                PrimaryRacialTrait::SuperStealth => {
+                    //*p.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                    //*p.add_ship_design(ship_designs[ShipId::ShadowTransport as usize].clone());
+                },
+                PrimaryRacialTrait::HyperExpansion => {
+                    //*p.add_ship_design(ship_designs[ShipId::SporeCloud as usize].clone());
+                },
+                PrimaryRacialTrait::AlternateReality => {
+                    //(&p).add_ship_design(ship_designs[ShipId::Pinta as usize].clone());
+                }
+            }
+
+            /*
+            if p.race.lesser_racial_traits.contains(&LesserRacialTrait::AdvancedRemoteMining) {
+                (&p).add_ship_design(ship_designs[ShipId::PotatoBug as usize].clone());
+            }
+            */
+        }
+
+        for q in ship_queue {
+            let (design, owner_id, homeworld_id, quantity) = q;
+            self.add_fleet_at_planet(&design, Some(owner_id), homeworld_id, quantity);
+        }
     }
 }

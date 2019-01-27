@@ -20,7 +20,9 @@
  *  DEALINGS IN THE SOFTWARE.
  */
 use ::game::objects::tech::TechnologyId;
+use ::game::objects::tech::TECHNOLOGY_DETAILS;
 use ::game::objects::universe::SpaceCoordinate;
+use ::game::objects::universe::Universe;
 use ::std::cmp::Ordering;
 
 pub const MAX_SHIP_DESIGNS : u8 = 16;
@@ -76,7 +78,8 @@ pub struct Fleet {
     pub location: SpaceCoordinate,
     pub heading: Option<SpaceCoordinate>,
     pub warp: Option<u8>,
-    //pub current_fuel: u32,
+    pub current_fuel: u32,
+    pub total_fuel_capacity: u32,
     //pub total_cargo_capacity: Option<u32>,
     // current damage level
     // current fuel level
@@ -87,10 +90,45 @@ pub struct Fleet {
 }
 
 impl Fleet {
-    /*
-    pub fn calculate_total_fuel_capacity(members : Vec<FleetMember>) -> u32 {
+    pub fn calculate_total_fuel_capacity(universe: &Universe, members : &Vec<FleetMember>) -> u32 {
+        let mut total_fuel = 0;
+
+        for member in members.iter() {
+            let d = universe.lookup_ship_design(member.design_id);
+            let quantity = member.quantity as u32;
+
+            match d {
+                Some(design) => {
+                    info!("hull={}, quantity={}", design.base_hull as usize, quantity);
+                    let hull = &TECHNOLOGY_DETAILS[design.base_hull as usize];
+                    info!("armor={}", hull.armor.unwrap());
+                    total_fuel += hull.fuel.unwrap() * quantity;
+                    match design.slots {
+                        Some(slots) => {
+                            for s in slots.iter() {
+                                match s {
+                                    Some(ship_slot) => {
+                                        let tech = &TECHNOLOGY_DETAILS[ship_slot.tid as usize];
+                                        match tech.fuel {
+                                            Some(f) => {
+                                                total_fuel += f * (ship_slot.amount as u32) * quantity;
+                                            },
+                                            None => {}
+                                        }
+                                    },
+                                    None => {}
+                                }
+                            }
+                        },
+                        None => {}
+                    }
+                },
+                None => {}
+            }
+        }
+
+        return total_fuel;
     }
-    */
 }
 
 impl PartialOrd for Fleet {

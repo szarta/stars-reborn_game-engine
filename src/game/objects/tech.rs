@@ -3719,38 +3719,6 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         hits_shields_only: None, accuracy: None, safe_mass: None,
         safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
-    Technology { // Radiating Hydro Ram Scoop
-        requirement: TechnologyRequirement {
-            levels: [2,0,6,0,0,0]
-        },
-        cost: TechnologyCost {
-            ironium: 3,
-            boranium: 2,
-            germanium: 9,
-            resources: 8
-        },
-        mass: Some(10),
-        battle_speed: Some(6),
-        warp10_travel: Some(false),
-        fuel_table: Some([0,0,0,0,0,0,0,165,375,600,720]),
-        cloaking: None,
-        mining_value: None,
-        terraforming_temperature: None,
-        terraforming_radiation: None,
-        terraforming_gravity: None,
-        fuel: None, fuel_per_year: None, beam_damage: None,
-        jamming: None,
-        initiative: None, 
-        beam_reduction: None, battle_speed_modifier: None,
-        basic_range: None, penetrating_range: None,
-        mines_per_year: None, mine_type: None, shield_value: None,
-        coverage: None, cargo: None, armor: None,
-        is_smart: None, colonist_kill_percent: None,
-        min_colonists_killed: None, buildings_destroyed: None, power: None,
-        range: None, is_spread: None,
-        hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
-    },
     Technology { // Sub Galactic Fuel Scoop
         requirement: TechnologyRequirement {
             levels: [2,0,8,0,0,0]
@@ -3902,37 +3870,6 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         jamming: None,
         initiative: None, 
         beam_reduction: None, battle_speed_modifier: None,
-        basic_range: None, penetrating_range: None,
-        mines_per_year: None, mine_type: None, shield_value: None,
-        coverage: None, cargo: None, armor: None,
-        is_smart: None, colonist_kill_percent: None,
-        min_colonists_killed: None, buildings_destroyed: None, power: None,
-        range: None, is_spread: None,
-        hits_shields_only: None, accuracy: None, safe_mass: None,
-        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
-    },
-    Technology { // Enigma Pulsar
-        requirement: TechnologyRequirement {
-            levels: [7,0,13,5,9,0]
-        },
-        cost: TechnologyCost {
-            ironium: 12,
-            boranium: 15,
-            germanium: 11,
-            resources: 40
-        },
-        mass: Some(20),
-        battle_speed: Some(10),
-        warp10_travel: Some(true),
-        fuel_table: Some([0,0,0,0,0,0,0,0,0,0,60]),
-        cloaking: Some(10),
-        battle_speed_modifier: Some(0.25),
-        mining_value: None,
-        terraforming_temperature: None,
-        terraforming_radiation: None,
-        terraforming_gravity: None,
-        fuel: None, fuel_per_year: None, beam_damage: None, jamming: None,
-        initiative: None,  beam_reduction: None,
         basic_range: None, penetrating_range: None,
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None, armor: None,
@@ -8252,6 +8189,37 @@ pub const TECHNOLOGY_DETAILS: &'static [Technology] = &[
         mines_per_year: None, mine_type: None, shield_value: None,
         coverage: None, cargo: None, armor: None,
         safe_mass: None,
+        safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
+    },
+    Technology { // Enigma Pulsar
+        requirement: TechnologyRequirement {
+            levels: [7,0,13,5,9,0]
+        },
+        cost: TechnologyCost {
+            ironium: 12,
+            boranium: 15,
+            germanium: 11,
+            resources: 40
+        },
+        mass: Some(20),
+        battle_speed: Some(10),
+        warp10_travel: Some(true),
+        fuel_table: Some([0,0,0,0,0,0,0,0,0,0,60]),
+        cloaking: Some(10),
+        battle_speed_modifier: Some(0.25),
+        mining_value: None,
+        terraforming_temperature: None,
+        terraforming_radiation: None,
+        terraforming_gravity: None,
+        fuel: None, fuel_per_year: None, beam_damage: None, jamming: None,
+        initiative: None,  beam_reduction: None,
+        basic_range: None, penetrating_range: None,
+        mines_per_year: None, mine_type: None, shield_value: None,
+        coverage: None, cargo: None, armor: None,
+        is_smart: None, colonist_kill_percent: None,
+        min_colonists_killed: None, buildings_destroyed: None, power: None,
+        range: None, is_spread: None,
+        hits_shields_only: None, accuracy: None, safe_mass: None,
         safe_distance: None, warp: None, slots: None, dock_capacity: None, regen_bonus_percent: None
     },
     Technology { // Mega Poly Shell

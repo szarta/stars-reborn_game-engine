@@ -47,10 +47,11 @@ pub fn generate_tutorial_game() -> Game {
     let p1_race = PredefinedRace::Humanoid.generate();
     let mut p1 = Player::construct_from_race(p1_race);
     p1.id = 0;
-    p1.generate_initial_ships(&mut u);
 
     u.planets[13].set_homeworld(&mut p1);
     u.planets[13].population = p1.race.calculate_starting_population(UniverseSize::Tiny);
+
+    u.players.push(p1);
 
     let mut p2_race = PredefinedCPURace::Robotoids.generate(CPUDifficulty::Expert);
     p2_race.name = "Berserker".to_string();
@@ -61,9 +62,8 @@ pub fn generate_tutorial_game() -> Game {
     u.planets[10].set_homeworld(&mut p2);
     u.planets[10].population = p2.race.calculate_starting_population(UniverseSize::Tiny);
 
-    u.players.push(p1);
     u.players.push(p2);
-
+    u.generate_initial_ships();
 
     let vc = VictoryConditions {
         owns_percent_planets: false,

@@ -2,7 +2,7 @@
 name = "stars-reborn_game-engine"
 description = "Game engine server for stars-reborn"
 license = "MIT"
-version = "0.1.6"
+version = "0.1.7"
 authors = ["Brandon Arrendondo <barrendo@gmail.com>"]
 
 [dependencies]

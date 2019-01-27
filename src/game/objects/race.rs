@@ -37,8 +37,6 @@ use game::objects::tech::PACKET_PHYSICS_TECHNOLOGY;
 use game::objects::tech::SUPER_STEALTH_TECHNOLOGY;
 use game::objects::tech::HYPER_EXPANSION_TECHNOLOGY;
 use game::objects::tech::ALTERNATE_REALITY_TECHNOLOGY;
-use game::objects::planet::Planet;
-use game::objects::universe::Universe;
 use game::objects::universe::UniverseSize;
 
 pub const BASE_STARTING_PLANET_POPULATION : u32 = 25000;
