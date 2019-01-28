@@ -1,5 +1,5 @@
 /*
- *  Copyright 2018 Brandon Arrendondo
+ *  Copyright 2018,2019 Brandon Arrendondo
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a
  *  copy of this software and associated documentation files (the "Software"),
@@ -182,6 +182,7 @@ pub struct Race {
     pub colonists_operate_mines: u8,
     pub colonists_operate_factories: u8,
     pub factory_cheap_germanium: bool,
+    pub ar_divisor: Option<u8>,
     pub growth_rate: u8,
 
     pub research_costs: [ResearchCost; 6],
