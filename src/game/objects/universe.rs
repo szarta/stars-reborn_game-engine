@@ -357,12 +357,13 @@ impl Universe {
             let best_laser = p.get_best_starting_laser();
             let best_shield = p.get_best_starting_shield();
             let best_scanner = p.get_best_starting_scanner();
-            let ship_designs = construct_initial_ship_designs(best_engine, best_laser, best_shield, best_scanner);
+            let best_miner = p.get_best_starting_miner();
+            let ship_designs = construct_initial_ship_designs(best_engine, best_laser, best_shield, best_scanner, best_miner);
 
             match p.race.primary_racial_trait {
                 PrimaryRacialTrait::ClaimAdjuster => {
-                    p.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
-                    ship_queue.push((p.ship_designs[0].clone().unwrap(), p.id, p.homeworld_id, 1));
+                    //p.add_ship_design(ship_designs[ShipId::SantaMaria as usize].clone());
+                    //ship_queue.push((p.ship_designs[0].clone().unwrap(), p.id, p.homeworld_id, 1));
                 },
                 PrimaryRacialTrait::JackOfAllTrades => {
                     p.add_ship_design(ship_designs[ShipId::ArmedProbe as usize].clone());
@@ -414,11 +415,10 @@ impl Universe {
                 }
             }
 
-            /*
             if p.race.lesser_racial_traits.contains(&LesserRacialTrait::AdvancedRemoteMining) {
-                (&p).add_ship_design(ship_designs[ShipId::PotatoBug as usize].clone());
+                let index = p.add_ship_design(ship_designs[ShipId::PotatoBug as usize].clone());
+                ship_queue.push((p.ship_designs[index as usize].clone().unwrap(), p.id, p.homeworld_id, 1));
             }
-            */
         }
 
         for q in ship_queue {

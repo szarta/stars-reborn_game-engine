@@ -71,10 +71,10 @@ impl Player {
         }
     }
 
-    fn get_next_available_ship_design_slot(&self) -> Option<u32> {
+    fn get_next_available_ship_design_slot(&self) -> Option<u8> {
         for i in 0..MAX_SHIP_DESIGNS {
             if !Option::is_some(&self.ship_designs[i as usize]) {
-                return Some(i as u32);
+                return Some(i);
             }
         }
 
@@ -85,7 +85,7 @@ impl Player {
         let i = self.get_next_available_ship_design_slot();
         match i {
             Some(index) => {
-                return Some((self.id as u32 * MAX_SHIP_DESIGNS as u32) + index);
+                return Some((self.id as u32 * MAX_SHIP_DESIGNS as u32) + index as u32);
             }
             None => {
                 return None;
@@ -93,16 +93,17 @@ impl Player {
         }
     }
 
-    pub fn add_ship_design(&mut self, mut d: ShipDesign) -> bool {
+    pub fn add_ship_design(&mut self, mut d: ShipDesign) -> u8 {
         match self.get_next_available_ship_design_slot() {
             Some(index) => {
                 let id = self.get_next_available_ship_design_id().unwrap();
                 d.id = id;
                 self.ship_designs[index as usize] = Some(d);
-                return true;
+                return index;
             }
             None => {
-                return false;
+                error!("Tried to add ship design but no slots remain.");
+                return MAX_SHIP_DESIGNS + 1;
             }
         }
     }
@@ -133,6 +134,18 @@ impl Player {
         }
 
         return TechnologyId::Laser;
+    }
+
+    pub fn get_best_starting_miner(&self) -> TechnologyId {
+        if self.available_tech_ids.contains(&TechnologyId::RoboMiner) {
+            return TechnologyId::RoboMidgetMiner.clone();
+        }
+
+        if self.available_tech_ids.contains(&TechnologyId::RoboMidgetMiner) {
+            return TechnologyId::RoboMidgetMiner.clone();
+        }
+
+        return TechnologyId::RoboMiniMiner;
     }
 
     pub fn get_best_starting_engine(&self) -> TechnologyId {

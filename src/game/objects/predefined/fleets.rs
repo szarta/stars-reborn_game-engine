@@ -60,7 +60,7 @@ pub const ORIGINAL_GAME_SHIP_NAMES : &'static [&'static str] = &[
 pub const NUMBER_OF_ORIGINAL_SHIP_DESIGNS : usize = 13;
 
 
-pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: TechnologyId, best_shield: TechnologyId, best_scanner: TechnologyId) -> [ShipDesign; NUMBER_OF_ORIGINAL_SHIP_DESIGNS]  {
+pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: TechnologyId, best_shield: TechnologyId, best_scanner: TechnologyId, best_miner: TechnologyId) -> [ShipDesign; NUMBER_OF_ORIGINAL_SHIP_DESIGNS]  {
     let santa_maria = ShipDesign {
         id: 0,
         icon_index: 0,
@@ -114,15 +114,13 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: Tec
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::RoboMidgetMiner,
+                tid: best_miner,
                 amount: 2
             }),
             None, None, None, None, None, None, None, None,
             None, None, None, None, None, None
         ])
     };
-
-
 
     let smaugarian_peeping_tom = ShipDesign {
         id: 0,
@@ -139,7 +137,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: Tec
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::BatScanner,
+                tid: best_scanner,
                 amount: 1
             }),
             None, None, None, None, None, None, None,
@@ -162,7 +160,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: Tec
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::BatScanner,
+                tid: best_scanner,
                 amount: 1
             }),
             None, None, None, None, None, None, None,
@@ -181,15 +179,15 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: Tec
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::RoboMiniMiner,
+                tid: best_miner,
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::RoboMiniMiner,
+                tid: best_miner,
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::BatScanner,
+                tid: best_scanner,
                 amount: 1
             }),
             None, None, None, None, None, None,
@@ -220,7 +218,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: Tec
                 amount: 2
             }),
             Some(ShipSlot {
-                tid: TechnologyId::BatScanner,
+                tid: best_scanner,
                 amount: 1
             }),
             Some(ShipSlot {
@@ -259,7 +257,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: Tec
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::BatScanner,
+                tid: best_scanner,
                 amount: 1
             }),
             None, None, None, None, None,
@@ -282,7 +280,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: Tec
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::BatScanner,
+                tid: best_scanner,
                 amount: 1
             }),
             None, None, None, None, None, None, None,
@@ -305,7 +303,7 @@ pub fn construct_initial_ship_designs(best_engine: TechnologyId, best_laser: Tec
                 amount: 1
             }),
             Some(ShipSlot {
-                tid: TechnologyId::RhinoScanner,
+                tid: best_scanner,
                 amount: 1
             }),
             None, None, None, None, None, None, None,
